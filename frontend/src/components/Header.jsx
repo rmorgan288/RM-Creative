@@ -53,7 +53,7 @@ const Header = () => {
             <button
               key={n.href}
               onClick={() => scrollTo(n.href)}
-              className="text-[13px] tracking-[0.08em] uppercase text-[#f2ece2]/80 hover:text-[#e3494e] transition-colors duration-300 link-underline"
+              className="font-sub text-[11px] text-[#f2ece2]/80 hover:text-[#e3494e] transition-colors duration-300 link-underline"
             >
               {n.label}
             </button>
@@ -63,7 +63,7 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-3">
           <Button
             onClick={() => scrollTo('#contact')}
-            className="bg-[#e3494e] hover:bg-[#c93b3f] text-white rounded-full h-11 px-5 text-[13px] tracking-wide border-0"
+            className="bg-[#e3494e] hover:bg-[#c93b3f] text-white rounded-full h-11 px-5 font-sub text-[11px] border-0"
           >
             Request a Quote
             <ArrowUpRight className="ml-1 w-4 h-4" />
@@ -88,7 +88,7 @@ const Header = () => {
               <button
                 key={n.href}
                 onClick={() => scrollTo(n.href)}
-                className="text-left font-display text-2xl text-[#f2ece2]"
+                className="text-left font-display uppercase tracking-tight text-2xl text-[#f2ece2] font-bold"
               >
                 {n.label}
               </button>

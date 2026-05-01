@@ -13,7 +13,7 @@ const FeaturedCase = () => {
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-3">
               § Featured Case Study
             </div>
-            <h2 className="font-display text-4xl md:text-6xl leading-[1] text-[#f2ece2]">
+            <h2 className="font-display-xl text-4xl md:text-7xl text-[#f2ece2]">
               {p.client}
             </h2>
           </div>
@@ -36,7 +36,7 @@ const FeaturedCase = () => {
 
         {/* Headline + summary */}
         <div className="mt-14 grid md:grid-cols-12 gap-10">
-          <h3 className="md:col-span-7 font-display text-3xl md:text-5xl leading-[1.1] text-[#f2ece2]">
+          <h3 className="md:col-span-7 font-display uppercase tracking-tight text-2xl md:text-4xl leading-[1.1] text-[#f2ece2] font-bold">
             {p.headline}
           </h3>
           <div className="md:col-span-5 md:pt-4">
@@ -72,20 +72,20 @@ const FeaturedCase = () => {
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-px bg-[#1f1f1f] border border-[#1f1f1f] rounded-sm overflow-hidden">
           {p.results.map((r) => (
             <div key={r.label} className="bg-[#0f0f0f] p-8 md:p-10">
-              <div className="font-display text-5xl md:text-6xl text-[#e3494e]">{r.kpi}</div>
-              <div className="mt-4 text-[13px] text-[#d8d2c6] max-w-xs leading-relaxed">{r.label}</div>
+              <div className="font-display-xl text-5xl md:text-7xl text-[#e3494e]">{r.kpi}</div>
+              <div className="mt-4 text-[13px] text-[#d8d2c6] max-w-xs leading-relaxed font-light">{r.label}</div>
             </div>
           ))}
         </div>
 
         {/* Pull quote */}
         <figure className="mt-20 md:mt-28 max-w-4xl">
-          <blockquote className="font-display text-2xl md:text-4xl leading-[1.25] text-[#f2ece2]">
+          <blockquote className="font-display text-2xl md:text-4xl leading-[1.25] text-[#f2ece2] font-medium">
             <span className="text-[#e3494e]">“</span>
             {p.quote.text}
             <span className="text-[#e3494e]">”</span>
           </blockquote>
-          <figcaption className="mt-6 text-[13px] uppercase tracking-[0.18em] text-[#8a8378]">
+          <figcaption className="mt-6 font-sub text-[12px] text-[#8a8378]">
             — {p.quote.author}, {p.quote.role}
           </figcaption>
         </figure>

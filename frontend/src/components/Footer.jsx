@@ -20,8 +20,8 @@ const Footer = () => {
                 className="h-9 w-auto object-contain"
               />
             </div>
-            <p className="mt-4 text-[13px] uppercase tracking-[0.22em] text-[#8a8378]">
-              Creative Marketing — Est. {brand.since}
+            <p className="mt-4 font-sub text-[12px] text-[#8a8378]">
+              Creative Marketing, based in South Wales — Est. {brand.since}
             </p>
           </div>
           <div className="md:col-span-3">

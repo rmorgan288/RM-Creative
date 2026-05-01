@@ -11,11 +11,11 @@ const Testimonials = () => {
         <div className="grid md:grid-cols-3 gap-10 md:gap-14">
           {testimonials.map((t, i) => (
             <figure key={i} className="border-t border-[#2a2a2a] pt-8">
-              <span className="font-display text-5xl text-[#e3494e] leading-none">“</span>
-              <blockquote className="mt-3 font-display text-xl md:text-2xl text-[#f2ece2] leading-snug">
+              <span className="font-display text-5xl text-[#e3494e] leading-none font-bold">“</span>
+              <blockquote className="mt-3 text-lg md:text-xl text-[#f2ece2] leading-snug font-light">
                 {t.quote}
               </blockquote>
-              <figcaption className="mt-8 text-[11px] uppercase tracking-[0.18em] text-[#8a8378]">
+              <figcaption className="mt-8 font-sub text-[11px] text-[#8a8378]">
                 — {t.author}
                 <span className="block text-[#5c564c] mt-1 tracking-[0.14em]">{t.role}</span>
               </figcaption>

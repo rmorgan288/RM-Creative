@@ -33,11 +33,11 @@ const About = () => {
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
               § About — Independent since {brand.since}
             </div>
-            <h2 className="font-display text-3xl md:text-5xl leading-[1.1] text-[#f2ece2]">
-              I’m Rhys. I’ve spent the last decade turning <em className="italic text-[#e3494e]">good ideas</em> into brands people actually notice.
+            <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2]">
+              I’m Rhys. I’ve spent the last decade turning <span className="text-[#e3494e]">good ideas</span> into brands people actually notice.
             </h2>
 
-            <div className="mt-8 space-y-5 text-[16px] text-[#c9c2b5] leading-relaxed max-w-2xl">
+            <div className="mt-8 space-y-5 text-[16px] text-[#c9c2b5] leading-relaxed max-w-2xl font-light">
               <p>
                 Before going independent I led creative at two London studios, directing work for
                 hospitality groups, retail brands and cultural institutions. I now work directly
@@ -60,9 +60,9 @@ const About = () => {
                   <div key={s.step} className="border-t border-[#2a2a2a] pt-5">
                     <div className="flex items-baseline gap-3">
                       <span className="font-mono text-[11px] text-[#e3494e]">{s.step}</span>
-                      <h4 className="font-display text-xl text-[#f2ece2]">{s.title}</h4>
+                      <h4 className="font-display uppercase tracking-wider text-base text-[#f2ece2] font-bold">{s.title}</h4>
                     </div>
-                    <p className="mt-2 text-[14px] text-[#a8a195] leading-relaxed">{s.body}</p>
+                    <p className="mt-2 text-[14px] text-[#a8a195] leading-relaxed font-light">{s.body}</p>
                   </div>
                 ))}
               </div>

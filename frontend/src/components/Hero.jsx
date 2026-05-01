@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
 import { hero, brand, clientsList } from '../mock';
 
 const Hero = () => {
@@ -22,19 +22,26 @@ const Hero = () => {
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative">
         {/* Eyebrow row */}
-        <div className="flex items-center gap-3 mb-8">
-          <span className="w-2 h-2 rounded-full bg-[#e3494e]" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
-            {hero.eyebrow}
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-8">
+          <span className="flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-[#e3494e]" />
+            <span className="font-sub text-[11px] text-[#8a8378]">
+              {hero.eyebrow}
+            </span>
+          </span>
+          <span className="hidden sm:inline-block w-6 h-px bg-[#3a3a3a]" />
+          <span className="inline-flex items-center gap-1.5 font-sub text-[11px] text-[#e3494e]">
+            <MapPin className="w-3 h-3" />
+            Based in South Wales
           </span>
         </div>
 
         {/* Headline */}
-        <h1 className="font-display font-light text-[clamp(3rem,9vw,9.5rem)] leading-[0.95] tracking-[-0.03em] text-[#f2ece2]">
+        <h1 className="font-display-xl text-[clamp(3.2rem,10vw,10rem)] text-[#f2ece2]">
           {hero.headlineLines.map((line, i) => (
             <span key={i} className="block">
               {line === 'craft.' ? (
-                <em className="italic text-[#e3494e] font-normal">craft.</em>
+                <span className="text-[#e3494e]">craft.</span>
               ) : (
                 line
               )}
@@ -87,7 +94,7 @@ const Hero = () => {
           {[...clientsList, ...clientsList].map((c, i) => (
             <span
               key={i}
-              className="font-display italic text-2xl md:text-3xl text-[#5c564c]"
+              className="font-display uppercase tracking-[0.12em] text-xl md:text-2xl text-[#5c564c] font-semibold"
             >
               {c}
               <span className="mx-8 text-[#e3494e]">—</span>

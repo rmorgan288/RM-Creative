@@ -11,8 +11,8 @@ const ProjectGrid = () => {
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-3">
               § Selected Work
             </div>
-            <h2 className="font-display text-4xl md:text-6xl leading-[1] text-[#f2ece2] max-w-3xl">
-              More projects, <em className="italic text-[#e3494e]">fewer words.</em>
+            <h2 className="font-display-xl text-4xl md:text-7xl text-[#f2ece2] max-w-3xl">
+              More projects, <span className="text-[#e3494e]">fewer words.</span>
             </h2>
           </div>
         </div>
@@ -36,10 +36,10 @@ const ProjectGrid = () => {
                   <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
                     {p.sector} · {p.year}
                   </div>
-                  <h3 className="mt-2 font-display text-2xl md:text-3xl text-[#f2ece2] group-hover:text-[#e3494e] transition-colors duration-500">
+                  <h3 className="mt-2 font-display uppercase tracking-tight text-xl md:text-2xl text-[#f2ece2] group-hover:text-[#e3494e] transition-colors duration-500 font-bold">
                     {p.client}
                   </h3>
-                  <p className="mt-3 text-[14px] text-[#a8a195] max-w-md leading-relaxed">
+                  <p className="mt-3 text-[14px] text-[#a8a195] max-w-md leading-relaxed font-light">
                     {p.blurb}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">

@@ -8,7 +8,8 @@ export const brand = {
   email: 'hello@rhysmorgan.studio',
   whatsapp: '+447700900123',
   whatsappDisplay: '+44 7700 900123',
-  location: 'London — Available worldwide',
+  location: 'Based in South Wales — Available worldwide',
+  locationShort: 'South Wales, UK',
   since: 2013,
 };
 
@@ -133,10 +134,10 @@ export const services = [
   },
   {
     number: '04',
-    title: 'Print & Editorial',
+    title: 'Content & Campaigns',
     description:
-      'Menus, lookbooks, magazines and packaging. Tangible work, held in the hand, not just the feed.',
-    deliverables: ['Editorial design', 'Packaging', 'Print production', 'Signage'],
+      'Social media assets, email marketing, and print/editorial design — built as a system, not one-offs.',
+    deliverables: ['Social content systems', 'Email & newsletters', 'Editorial & print', 'Campaign rollout'],
   },
 ];
 
