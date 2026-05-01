@@ -43,7 +43,7 @@ export const featuredProject = {
   year: 2024,
   headline: 'A late-night kitchen dressed for the front row.',
   summary:
-    'A ground-up identity, menu system, signage and digital presence for a new Soho neighbourhood bar. We translated the idea of “slow evenings” into a warm, charcoal-toned brand with hand-drawn marks and a confident voice.',
+    'A ground-up identity, menu system, signage and digital presence for a new Soho neighbourhood bar. I translated the idea of “slow evenings” into a warm, charcoal-toned brand with hand-drawn marks and a confident voice.',
   cover:
     'https://images.unsplash.com/photo-1767745455688-49391131f751?crop=entropy&cs=srgb&fm=jpg&q=85',
   gallery: [
@@ -129,7 +129,7 @@ export const services = [
     number: '03',
     title: 'Creative Direction',
     description:
-      'Acting as an embedded partner for campaigns, launches and rebrands. One hand on the vision.',
+      'I act as an embedded partner for campaigns, launches and rebrands — one hand on the vision throughout.',
     deliverables: ['Campaign concepts', 'Photography direction', 'Messaging', 'Launch planning'],
   },
   {
@@ -140,6 +140,21 @@ export const services = [
     deliverables: ['Social content systems', 'Email & newsletters', 'Editorial & print', 'Campaign rollout'],
   },
 ];
+
+export const retainer = {
+  number: '05',
+  label: 'Ongoing Partnership',
+  title: 'Monthly Growth & Strategy Retainers',
+  description:
+    'For brands ready to compound results month over month. I work alongside your team as an embedded creative partner — combining ongoing creative direction, strategy, and analytics so the work keeps moving, refining, and earning attention long after launch.',
+  inclusions: [
+    'Monthly strategy & planning sessions',
+    'Continuous creative direction',
+    'Analytics, reporting & iteration',
+    'Priority access & flexible scope',
+  ],
+  cta: 'Enquire about retainers',
+};
 
 export const testimonials = [
   {
@@ -167,8 +182,8 @@ export const about = {
   heading: 'Agency-level expertise.',
   headingAccent: 'Without the agency overhead.',
   body: [
-    'With over 15 years of industry experience, Rhys Morgan brings the strategic weight of a Creative Director to the agility of a freelance partner. Having led creative for iconic names like Disney, Team GB, and National Grid, Rhys now focuses on bridging the gap between high-level brand strategy and local business growth.',
-    'His approach is simple: agency-level expertise without the agency overhead — providing direct access to a creative all-rounder who prioritises speed, precision, and results.',
+    'With over 15 years in the creative industry, I bring the strategic weight of a Creative Director to the agility of a freelance partnership. Having led creative for iconic names like Disney, Team GB, and National Grid, I now specialise in bridging the gap between high-level brand strategy and local business growth.',
+    'My approach is straightforward: agency-level expertise without the agency overhead — giving you direct access to a creative all-rounder who prioritises speed, precision, and results.',
   ],
 };
 
@@ -176,7 +191,7 @@ export const processSteps = [
   {
     step: '01',
     title: 'Discover',
-    body: 'We dive deep into your brief to understand your vision, audience, and market landscape.',
+    body: 'I dive deep into your brief to understand your vision, audience, and market landscape.',
   },
   {
     step: '02',
@@ -186,12 +201,12 @@ export const processSteps = [
   {
     step: '03',
     title: 'Deliver',
-    body: 'From final branding to digital assets, we produce and publish high-quality work ready for the live market.',
+    body: 'From final branding to digital assets, I produce and publish high-quality work ready for the live market.',
   },
   {
     step: '04',
     title: 'Develop',
-    body: 'Post-launch support using real-world data and analytics to refine, optimise, and ensure long-term success.',
+    body: 'I provide post-launch support and monthly growth retainers, using real-world data and analytics to refine, optimise, and ensure your long-term success.',
   },
 ];
 
