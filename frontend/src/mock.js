@@ -30,9 +30,9 @@ export const hero = {
   subcopy:
     'Elevating brands through digital-led marketing, creative strategy, and professional branding services.',
   stats: [
-    { value: '12+', label: 'Years directing brands' },
-    { value: '80+', label: 'Projects shipped' },
-    { value: '4', label: 'D&AD / Brand Awards' },
+    { value: '15+', label: 'Years of industry experience' },
+    { value: '8', label: 'National & global brands shaped' },
+    { value: '4D', label: 'Framework-led process' },
   ],
 };
 
@@ -162,15 +162,48 @@ export const testimonials = [
   },
 ];
 
+export const about = {
+  eyebrow: 'About — Independent Creative Director',
+  heading: 'Agency-level expertise.',
+  headingAccent: 'Without the agency overhead.',
+  body: [
+    'With over 15 years of industry experience, Rhys Morgan brings the strategic weight of a Creative Director to the agility of a freelance partner. Having led creative for iconic names like Disney, Team GB, and National Grid, Rhys now focuses on bridging the gap between high-level brand strategy and local business growth.',
+    'His approach is simple: agency-level expertise without the agency overhead — providing direct access to a creative all-rounder who prioritises speed, precision, and results.',
+  ],
+};
+
 export const processSteps = [
-  { step: '01', title: 'Listen', body: 'A proper conversation. No briefs-by-email, no templated discovery.' },
-  { step: '02', title: 'Frame', body: 'A written point of view on what the brand should become — before a pixel is moved.' },
-  { step: '03', title: 'Design', body: 'Tight loops, few rounds, clear rationale. You’ll always know why.' },
-  { step: '04', title: 'Ship', body: 'Hands-on through launch and the first 90 days. Brands live or die in the details.' },
+  {
+    step: '01',
+    title: 'Discover',
+    body: 'We dive deep into your brief to understand your vision, audience, and market landscape.',
+  },
+  {
+    step: '02',
+    title: 'Define',
+    body: 'Strategic analysis meets creative concepting to map out a clear, impactful path forward.',
+  },
+  {
+    step: '03',
+    title: 'Deliver',
+    body: 'From final branding to digital assets, we produce and publish high-quality work ready for the live market.',
+  },
+  {
+    step: '04',
+    title: 'Develop',
+    body: 'Post-launch support using real-world data and analytics to refine, optimise, and ensure long-term success.',
+  },
 ];
 
 export const clientsList = [
-  'Butterflies', 'Aurora Skin Co.', 'Meridian', 'Northfield', 'Volta', 'Hart & Finch', 'Oslo Press', 'Ember Hotels',
+  'Disney',
+  'Team GB',
+  'The Royal Mint',
+  'National Grid',
+  'e.on',
+  'Butterflies Bar & Kitchen',
+  'St Albans City FC',
+  'Marie Curie',
 ];
 
 // Mock contact form submission - logs to console + saves to localStorage
