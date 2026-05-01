@@ -1,0 +1,77 @@
+import React from 'react';
+import { brand, hero, processSteps } from '../mock';
+
+const About = () => {
+  const portrait = 'https://images.unsplash.com/photo-1600896997793-b8ed3459a17f?crop=entropy&cs=srgb&fm=jpg&q=85';
+  const workspace = 'https://images.pexels.com/photos/8774458/pexels-photo-8774458.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
+  return (
+    <section id="about" className="py-24 md:py-32 bg-[#121212] border-t border-[#1f1f1f]">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+        <div className="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
+          {/* Left: portrait */}
+          <div className="md:col-span-5 space-y-6">
+            <div className="img-tile">
+              <img
+                src={portrait}
+                alt="Rhys Morgan portrait"
+                className="w-full h-[60vh] object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                loading="lazy"
+              />
+            </div>
+            <div className="img-tile hidden md:block">
+              <img
+                src={workspace}
+                alt="Studio workspace"
+                className="w-full h-[34vh] object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          {/* Right: copy */}
+          <div className="md:col-span-7 md:pl-6">
+            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
+              § About — Independent since {brand.since}
+            </div>
+            <h2 className="font-display text-3xl md:text-5xl leading-[1.1] text-[#f2ece2]">
+              I’m Rhys. I’ve spent the last decade turning <em className="italic text-[#e3494e]">good ideas</em> into brands people actually notice.
+            </h2>
+
+            <div className="mt-8 space-y-5 text-[16px] text-[#c9c2b5] leading-relaxed max-w-2xl">
+              <p>
+                Before going independent I led creative at two London studios, directing work for
+                hospitality groups, retail brands and cultural institutions. I now work directly
+                with founders — no layers, no account managers — on a small number of engagements
+                a year so each one gets the attention it deserves.
+              </p>
+              <p>
+                My practice sits between strategy, art direction and craft. I care about how a
+                brand reads on a business card at midnight, not just how it looks in a case study.
+              </p>
+            </div>
+
+            {/* Process */}
+            <div className="mt-14">
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-6">
+                How I work
+              </div>
+              <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8">
+                {processSteps.map((s) => (
+                  <div key={s.step} className="border-t border-[#2a2a2a] pt-5">
+                    <div className="flex items-baseline gap-3">
+                      <span className="font-mono text-[11px] text-[#e3494e]">{s.step}</span>
+                      <h4 className="font-display text-xl text-[#f2ece2]">{s.title}</h4>
+                    </div>
+                    <p className="mt-2 text-[14px] text-[#a8a195] leading-relaxed">{s.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;
