@@ -33,8 +33,8 @@ const Hero = () => {
         <h1 className="font-display font-light text-[clamp(3rem,9vw,9.5rem)] leading-[0.95] tracking-[-0.03em] text-[#f2ece2]">
           {hero.headlineLines.map((line, i) => (
             <span key={i} className="block">
-              {line === 'substance,' ? (
-                <em className="italic text-[#e3494e] font-normal">substance,</em>
+              {line === 'craft.' ? (
+                <em className="italic text-[#e3494e] font-normal">craft.</em>
               ) : (
                 line
               )}

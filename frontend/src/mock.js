@@ -20,14 +20,14 @@ export const navigation = [
 ];
 
 export const hero = {
-  eyebrow: 'Creative Director · Graphic & Web Design',
+  eyebrow: 'Creative Marketing · Brand Strategy · Digital',
   headlineLines: [
-    'Brands with',
-    'substance,',
-    'stories that stay.',
+    'Where strategy',
+    'meets',
+    'craft.',
   ],
   subcopy:
-    'I partner with ambitious founders, restaurateurs and studios to design identities, websites and campaigns that earn attention — and keep it.',
+    'Elevating brands through digital-led marketing, creative strategy, and professional branding services.',
   stats: [
     { value: '12+', label: 'Years directing brands' },
     { value: '80+', label: 'Projects shipped' },
