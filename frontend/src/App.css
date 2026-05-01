@@ -113,3 +113,43 @@ body {
 .font-mono {
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
+
+/* ===========================================
+   PRINT STYLES — Client Proposal "Download PDF"
+   =========================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 16mm 14mm;
+  }
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+  .grain::before {
+    display: none !important;
+  }
+  /* Avoid breaking sections awkwardly */
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  article,
+  figure {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+    break-inside: avoid;
+  }
+  /* Keep the red accent recognisable in print */
+  .text-\[\#e3494e\] {
+    color: #c93b3f !important;
+  }
+  a[href^='mailto'],
+  a[href^='https://wa.me'] {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+}

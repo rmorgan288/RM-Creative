@@ -229,3 +229,142 @@ export const submitContactMock = (payload) => {
   localStorage.setItem('rm_contact_submissions', JSON.stringify(existing));
   return new Promise((resolve) => setTimeout(() => resolve({ ok: true, id: record.id }), 700));
 };
+
+// -----------------------------
+// CLIENT PROPOSALS (hidden template pages)
+// Keyed by slug: /proposals/:slug
+// -----------------------------
+export const proposals = {
+  'the-hobby-horse': {
+    slug: 'the-hobby-horse',
+    status: 'DRAFT',
+    client: 'The Hobby Horse',
+    projectTitle: 'Brand Identity, Interiors & Digital Launch',
+    preparedFor: 'Harriet Ashworth, Founder',
+    preparedBy: 'Rhys Morgan, Creative Marketing',
+    preparedDate: 'November 2025',
+    validUntil: '31 December 2025',
+    reference: 'RM-2025-048',
+    intro:
+      'A proposal to bring The Hobby Horse — a modern British gastropub with equestrian heritage — to life as a confident, contemporary brand. Built on craft, character and a sense of place, ready to open its doors to a loyal local following and a wider destination audience.',
+    scope: {
+      goals: [
+        'Define a clear brand platform — positioning, voice and visual identity — before a single asset is designed.',
+        'Translate the equestrian heritage into a modern, ownable identity that works across interiors, print and digital.',
+        'Launch with a high-performing website, booking flow, and a three-month digital campaign.',
+      ],
+      deliverables: [
+        'Brand strategy & naming review',
+        'Logo, wordmark & brand system',
+        'Menu, coasters & print collateral',
+        'Interior signage & wayfinding',
+        'Responsive website & booking flow',
+        'Launch campaign (social, email, press)',
+      ],
+      timeline: [
+        { phase: 'Discover', weeks: 'Weeks 1–2', body: 'Strategy workshop, competitor audit, voice exploration.' },
+        { phase: 'Define', weeks: 'Weeks 3–5', body: 'Identity directions, interior signage concepts, website wireframes.' },
+        { phase: 'Deliver', weeks: 'Weeks 6–10', body: 'Full system rollout — print, environment, build, launch.' },
+        { phase: 'Develop', weeks: 'Weeks 11+', body: 'Ongoing creative retainer, analytics, content calendar.' },
+      ],
+    },
+    concepts: [
+      {
+        name: 'Concept 01 — The Stable',
+        direction: 'Warm, candle-lit and confidently local. Rich wood-toned palette, letterpress-inspired wordmark, a hand-drawn horse mark used sparingly as a seal. Feels like a neighbourhood favourite from day one.',
+        image:
+          'https://images.unsplash.com/photo-1714733340805-268e89cf861a?crop=entropy&cs=srgb&fm=jpg&q=85',
+      },
+      {
+        name: 'Concept 02 — Saddle & Crown',
+        direction: 'Heritage-forward with a modern twist. Editorial typography paired with a crest-led mark. Saddle-leather tans, off-whites and deep reds. A brand that nods to coaching inns without feeling costumed.',
+        image:
+          'https://images.unsplash.com/photo-1757228727900-7758efc55404?crop=entropy&cs=srgb&fm=jpg&q=85',
+      },
+      {
+        name: 'Concept 03 — Press & Paper',
+        direction: 'A system led by print. Letterpress menus, numbered editions, collectable coasters. A quieter, craft-first route that rewards the guests who look twice.',
+        image:
+          'https://images.unsplash.com/photo-1634573595357-de8a4448c573?crop=entropy&cs=srgb&fm=jpg&q=85',
+      },
+      {
+        name: 'Concept 04 — Digital First',
+        direction: 'A confident digital presence out of the gate — booking-led site, signature photography, and a content system that runs without a dedicated agency. Built for growth from week one.',
+        image:
+          'https://images.unsplash.com/photo-1771923082503-0a3381c46cef?crop=entropy&cs=srgb&fm=jpg&q=85',
+      },
+    ],
+    investment: {
+      currency: '£',
+      note: 'All tiers include the full 4D Framework (Discover → Develop). Prices exclude VAT and third-party costs (photography, printing, ads).',
+      tiers: [
+        {
+          name: 'Essential',
+          tag: 'Launch-ready',
+          price: '8,400',
+          cadence: 'project',
+          summary: 'Core brand, print essentials and a single-page launch site.',
+          includes: [
+            'Brand strategy & one identity direction',
+            'Logo, wordmark & core guidelines',
+            'Menu, coasters & 2 print items',
+            'Single-page website (up to 8 sections)',
+            '30-day post-launch support',
+          ],
+          featured: false,
+        },
+        {
+          name: 'Signature',
+          tag: 'Recommended',
+          price: '14,800',
+          cadence: 'project',
+          summary: 'Full system, bookable website and a coordinated launch.',
+          includes: [
+            'Strategy + two identity directions',
+            'Complete brand system & guidelines',
+            'Print suite (menus, coasters, signage)',
+            'Responsive website + booking flow',
+            'Launch campaign (social, email, press)',
+            '60-day post-launch support',
+          ],
+          featured: true,
+        },
+        {
+          name: 'Enterprise',
+          tag: 'Full partnership',
+          price: '24,500',
+          cadence: 'project + retainer',
+          summary: 'Signature tier plus 6 months of ongoing growth partnership.',
+          includes: [
+            'Everything in Signature',
+            'Photography direction & shoot',
+            'Interior signage & wayfinding',
+            'Monthly strategy & creative retainer (6 months)',
+            'Analytics, reporting & iteration',
+            'Priority access, flexible scope',
+          ],
+          featured: false,
+        },
+      ],
+    },
+    terms: [
+      '50% engagement fee on acceptance, balance invoiced at delivery milestones.',
+      'Two rounds of feedback included per deliverable; additional rounds billed at £120/hr.',
+      'This proposal is valid for 60 days from the date issued.',
+    ],
+  },
+};
+
+export const getProposal = (slug) => proposals[slug] || null;
+
+export const acceptProposalMock = (slug, tierName) => {
+  const record = {
+    slug,
+    tier: tierName,
+    acceptedAt: new Date().toISOString(),
+  };
+  const existing = JSON.parse(localStorage.getItem('rm_proposal_acceptances') || '[]');
+  existing.push(record);
+  localStorage.setItem('rm_proposal_acceptances', JSON.stringify(existing));
+  return new Promise((resolve) => setTimeout(() => resolve({ ok: true }), 600));
+};

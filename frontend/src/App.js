@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Portfolio from './pages/Portfolio';
+import ClientProposal from './pages/ClientProposal';
 import { Toaster } from './components/ui/sonner';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Portfolio />} />
+          <Route path="/proposals/:slug" element={<ClientProposal />} />
         </Routes>
       </BrowserRouter>
       <Toaster position="bottom-right" theme="dark" />
