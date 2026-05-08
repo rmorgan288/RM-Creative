@@ -242,9 +242,13 @@ export const proposals = {
     projectTitle: 'Digital Brand & Web Elevation for The Hobby Horse',
     preparedFor: 'Harriet Ashworth, Founder',
     preparedBy: 'Rhys Morgan, Creative Marketing',
-    preparedDate: 'November 2025',
-    validUntil: '31 December 2025',
+    // preparedDate and validUntil are intentionally omitted — the component
+    // auto-computes the current month/year and a +60-day expiry.
+    preparedDate: null,
+    validUntil: null,
     reference: 'RM-2025-048',
+    coverImage:
+      'https://images.unsplash.com/photo-1714733340805-268e89cf861a?crop=entropy&cs=srgb&fm=jpg&q=85',
     intro:
       'A focused proposal to elevate The Hobby Horse from a respected local name into a destination digital brand. Three coordinated workstreams — a full digital rebrand, a bespoke website build, and a local SEO strategy — designed to win the next 12 months of bookings, walk-ins and reputation.',
     scope: {
@@ -272,25 +276,25 @@ export const proposals = {
     },
     concepts: [
       {
-        name: 'Concept 01 — The Stable',
+        name: 'Idea 01 — The Stable',
         direction: 'Warm, candle-lit, confidently local. Rich wood-toned palette, letterpress-inspired wordmark, a hand-drawn horse mark used sparingly as a seal. A neighbourhood favourite from day one.',
         image:
           'https://images.unsplash.com/photo-1714733340805-268e89cf861a?crop=entropy&cs=srgb&fm=jpg&q=85',
       },
       {
-        name: 'Concept 02 — Saddle & Crown',
+        name: 'Idea 02 — Saddle & Crown',
         direction: 'Heritage-forward with a modern twist. Editorial typography paired with a crest-led mark. Saddle-leather tans, off-whites and deep reds — nodding to coaching inns without feeling costumed.',
         image:
           'https://images.unsplash.com/photo-1757228727900-7758efc55404?crop=entropy&cs=srgb&fm=jpg&q=85',
       },
       {
-        name: 'Concept 03 — Press & Paper',
+        name: 'Idea 03 — Press & Paper',
         direction: 'A system led by print. Letterpress menus, numbered editions, collectable coasters. A quieter, craft-first route that rewards guests who look twice.',
         image:
           'https://images.unsplash.com/photo-1634573595357-de8a4448c573?crop=entropy&cs=srgb&fm=jpg&q=85',
       },
       {
-        name: 'Concept 04 — Digital First',
+        name: 'Idea 04 — Digital First',
         direction: 'A confident digital presence out of the gate — booking-led site, signature photography, and a content system that runs without a dedicated agency. Built for growth from week one.',
         image:
           'https://images.unsplash.com/photo-1771923082503-0a3381c46cef?crop=entropy&cs=srgb&fm=jpg&q=85',
@@ -351,7 +355,7 @@ export const proposals = {
     },
     terms: [
       '50% engagement fee on acceptance, balance invoiced at delivery milestones.',
-      'Two rounds of feedback included per deliverable; additional rounds billed at £120/hr.',
+      'Two rounds of feedback included per deliverable; additional time billed at the standard rate of £30/hr.',
       'This proposal is valid for 60 days from the date issued.',
     ],
   },
@@ -359,6 +363,16 @@ export const proposals = {
 
 // Backwards-compatibility — old preview link still works
 proposals['the-hobby-horse'] = proposals['hobby-horse'];
+
+// Live date helpers — proposal preparedDate / validUntil auto-fill to "now" if not set
+export const formatProposalDate = (date = new Date()) =>
+  date.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+
+export const formatValidUntil = (days = 60, base = new Date()) => {
+  const d = new Date(base);
+  d.setDate(d.getDate() + days);
+  return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+};
 
 export const getProposal = (slug) => proposals[slug] || null;
 

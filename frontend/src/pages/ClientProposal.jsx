@@ -16,7 +16,7 @@ import {
   PartyPopper,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { getProposal, recordProposalActionMock, brand } from '../mock';
+import { getProposal, recordProposalActionMock, brand, formatProposalDate, formatValidUntil } from '../mock';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
@@ -168,6 +168,10 @@ const ClientProposal = () => {
     `Proposal ${proposal.reference} — ${proposal.client}`
   )}`;
 
+  // Live-current dates (re-computed on each render unless overridden in proposal data)
+  const displayPreparedDate = proposal.preparedDate || formatProposalDate();
+  const displayValidUntil = proposal.validUntil || formatValidUntil(60);
+
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-[#f2ece2] print:bg-white print:text-black">
       {/* Proposal header bar (replaces site nav) */}
@@ -206,39 +210,69 @@ const ClientProposal = () => {
         </div>
       </header>
 
-      <main className="max-w-[1280px] mx-auto px-6 md:px-10 py-14 md:py-20 print:py-8">
-        {/* Cover */}
-        <section className="grid md:grid-cols-12 gap-8 md:gap-14 pb-16 md:pb-24 border-b border-[#1f1f1f]">
-          <div className="md:col-span-8">
-            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-5">
-              § Proposal · {proposal.reference}
+      {/* Full-bleed hero cover with image + dark overlay */}
+      <section className="relative overflow-hidden border-b border-[#1f1f1f] print:border-neutral-300">
+        {proposal.coverImage && (
+          <>
+            <img
+              src={proposal.coverImage}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover print:hidden"
+              loading="eager"
+            />
+            {/* Dark luxury overlay — strong, fades into the page background */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-b from-[#0f0f0f]/85 via-[#0f0f0f]/82 to-[#0f0f0f] print:hidden"
+            />
+            {/* Subtle red accent bloom in the corner */}
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-32 -left-24 w-[520px] h-[520px] rounded-full blur-3xl opacity-25 print:hidden"
+              style={{
+                background:
+                  'radial-gradient(closest-side, rgba(227,73,78,0.45), rgba(227,73,78,0) 70%)',
+              }}
+            />
+          </>
+        )}
+        <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 py-20 md:py-28 print:py-10">
+          <div className="grid md:grid-cols-12 gap-8 md:gap-14">
+            <div className="md:col-span-8">
+              <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-5">
+                § Proposal · {proposal.reference}
+              </div>
+              <h1 className="font-display-xl text-5xl md:text-7xl leading-[0.95] text-[#f2ece2] print:text-black">
+                {proposal.client}
+              </h1>
+              <h2 className="mt-6 font-display uppercase tracking-tight text-xl md:text-2xl text-[#e3494e] font-bold">
+                {proposal.projectTitle}
+              </h2>
+              <p className="mt-8 text-[17px] text-[#d8d2c6] print:text-neutral-700 leading-relaxed font-light max-w-2xl">
+                {proposal.intro}
+              </p>
             </div>
-            <h1 className="font-display-xl text-5xl md:text-7xl leading-[0.95] text-[#f2ece2] print:text-black">
-              {proposal.client}
-            </h1>
-            <h2 className="mt-6 font-display uppercase tracking-tight text-xl md:text-2xl text-[#e3494e] font-bold">
-              {proposal.projectTitle}
-            </h2>
-            <p className="mt-8 text-[17px] text-[#c9c2b5] print:text-neutral-700 leading-relaxed font-light max-w-2xl">
-              {proposal.intro}
-            </p>
+            <aside className="md:col-span-4 md:pt-14">
+              <dl className="grid grid-cols-2 md:grid-cols-1 gap-6 md:gap-4 text-[13px]">
+                {[
+                  ['Prepared for', proposal.preparedFor],
+                  ['Prepared by', proposal.preparedBy],
+                  ['Date', displayPreparedDate],
+                  ['Valid until', displayValidUntil],
+                ].map(([k, v]) => (
+                  <div key={k} className="border-t border-[#3a3a3a] print:border-neutral-300 pt-3">
+                    <dt className="font-sub text-[10px] text-[#a8a195] print:text-neutral-600 mb-1">{k}</dt>
+                    <dd className="text-[#f2ece2] print:text-black font-light">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </aside>
           </div>
-          <aside className="md:col-span-4 md:pt-14">
-            <dl className="grid grid-cols-2 md:grid-cols-1 gap-6 md:gap-4 text-[13px]">
-              {[
-                ['Prepared for', proposal.preparedFor],
-                ['Prepared by', proposal.preparedBy],
-                ['Date', proposal.preparedDate],
-                ['Valid until', proposal.validUntil],
-              ].map(([k, v]) => (
-                <div key={k} className="border-t border-[#2a2a2a] pt-3">
-                  <dt className="font-sub text-[10px] text-[#8a8378] mb-1">{k}</dt>
-                  <dd className="text-[#f2ece2] print:text-black font-light">{v}</dd>
-                </div>
-              ))}
-            </dl>
-          </aside>
-        </section>
+        </div>
+      </section>
+
+      <main className="max-w-[1280px] mx-auto px-6 md:px-10 py-14 md:py-20 print:py-8">
 
         {/* Project Scope */}
         <section className="py-16 md:py-24 border-b border-[#1f1f1f]">
@@ -305,18 +339,19 @@ const ClientProposal = () => {
           </div>
         </section>
 
-        {/* Design Concepts */}
+        {/* Initial Ideas */}
         <section className="py-16 md:py-24 border-b border-[#1f1f1f]">
           <div className="mb-12">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-              § 02 Design Concepts
+              § 02 Initial Ideas
             </div>
             <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2] print:text-black max-w-3xl">
-              Four directions, <span className="text-[#e3494e]">one brand.</span>
+              A few <span className="text-[#e3494e]">starting points.</span>
             </h2>
-            <p className="mt-5 text-[15px] text-[#a8a195] print:text-neutral-700 font-light max-w-2xl">
-              Starting points rather than finished work. We’ll narrow to one direction in the
-              Define phase, then build the full system around it.
+            <p className="mt-5 text-[15px] text-[#a8a195] print:text-neutral-700 font-light max-w-2xl leading-relaxed">
+              Not committed to any of these — just a handful of early thoughts to set the
+              conversation in motion. We’ll narrow, refine and pick a direction together once we’re
+              working.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8 md:gap-10">
@@ -775,7 +810,7 @@ const ClientProposal = () => {
               {proposal.client} · {proposal.projectTitle}
             </span>
             <span>
-              {proposal.reference} · {proposal.preparedDate}
+              {proposal.reference} · {displayPreparedDate}
             </span>
           </div>
         </section>
@@ -789,7 +824,7 @@ const ClientProposal = () => {
           </span>
           <span className="flex items-center gap-2">
             <FileText className="w-3.5 h-3.5" />
-            Proposal v1.0 · {proposal.preparedDate}
+            Proposal v1.0 · {displayPreparedDate}
           </span>
         </div>
       </footer>
