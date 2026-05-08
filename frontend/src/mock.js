@@ -235,55 +235,57 @@ export const submitContactMock = (payload) => {
 // Keyed by slug: /proposals/:slug
 // -----------------------------
 export const proposals = {
-  'the-hobby-horse': {
-    slug: 'the-hobby-horse',
+  'hobby-horse': {
+    slug: 'hobby-horse',
     status: 'DRAFT',
     client: 'The Hobby Horse',
-    projectTitle: 'Brand Identity, Interiors & Digital Launch',
+    projectTitle: 'Digital Brand & Web Elevation for The Hobby Horse',
     preparedFor: 'Harriet Ashworth, Founder',
     preparedBy: 'Rhys Morgan, Creative Marketing',
     preparedDate: 'November 2025',
     validUntil: '31 December 2025',
     reference: 'RM-2025-048',
     intro:
-      'A proposal to bring The Hobby Horse — a modern British gastropub with equestrian heritage — to life as a confident, contemporary brand. Built on craft, character and a sense of place, ready to open its doors to a loyal local following and a wider destination audience.',
+      'A focused proposal to elevate The Hobby Horse from a respected local name into a destination digital brand. Three coordinated workstreams — a full digital rebrand, a bespoke website build, and a local SEO strategy — designed to win the next 12 months of bookings, walk-ins and reputation.',
     scope: {
+      summary:
+        'Full digital rebrand, bespoke website build, and local SEO strategy.',
       goals: [
-        'Define a clear brand platform — positioning, voice and visual identity — before a single asset is designed.',
-        'Translate the equestrian heritage into a modern, ownable identity that works across interiors, print and digital.',
-        'Launch with a high-performing website, booking flow, and a three-month digital campaign.',
+        'Reposition the brand for a wider, destination-led audience without losing the loyal local following.',
+        'Replace the existing site with a fast, bespoke, booking-first build that converts on mobile.',
+        'Own the local search results for "gastropub", "Sunday roast" and bookable terms within 90 days of launch.',
       ],
       deliverables: [
-        'Brand strategy & naming review',
-        'Logo, wordmark & brand system',
-        'Menu, coasters & print collateral',
-        'Interior signage & wayfinding',
-        'Responsive website & booking flow',
-        'Launch campaign (social, email, press)',
+        'Brand audit & reposition strategy',
+        'Refreshed identity system (digital-first)',
+        'Bespoke website design & build',
+        'Booking flow & integrations',
+        'Local SEO setup & 90-day plan',
+        'Photography direction & launch assets',
       ],
       timeline: [
-        { phase: 'Discover', weeks: 'Weeks 1–2', body: 'Strategy workshop, competitor audit, voice exploration.' },
-        { phase: 'Define', weeks: 'Weeks 3–5', body: 'Identity directions, interior signage concepts, website wireframes.' },
-        { phase: 'Deliver', weeks: 'Weeks 6–10', body: 'Full system rollout — print, environment, build, launch.' },
-        { phase: 'Develop', weeks: 'Weeks 11+', body: 'Ongoing creative retainer, analytics, content calendar.' },
+        { phase: 'Discover', weeks: 'Weeks 1–2', body: 'Brand audit, customer interviews, competitor and search landscape review.' },
+        { phase: 'Define',   weeks: 'Weeks 3–5', body: 'Strategy doc, refined identity direction, site architecture and SEO blueprint.' },
+        { phase: 'Deliver',  weeks: 'Weeks 6–10', body: 'Design, build, content, photography direction, launch.' },
+        { phase: 'Develop',  weeks: 'Weeks 11+',  body: 'Local SEO execution, monthly reporting, ongoing creative retainer.' },
       ],
     },
     concepts: [
       {
         name: 'Concept 01 — The Stable',
-        direction: 'Warm, candle-lit and confidently local. Rich wood-toned palette, letterpress-inspired wordmark, a hand-drawn horse mark used sparingly as a seal. Feels like a neighbourhood favourite from day one.',
+        direction: 'Warm, candle-lit, confidently local. Rich wood-toned palette, letterpress-inspired wordmark, a hand-drawn horse mark used sparingly as a seal. A neighbourhood favourite from day one.',
         image:
           'https://images.unsplash.com/photo-1714733340805-268e89cf861a?crop=entropy&cs=srgb&fm=jpg&q=85',
       },
       {
         name: 'Concept 02 — Saddle & Crown',
-        direction: 'Heritage-forward with a modern twist. Editorial typography paired with a crest-led mark. Saddle-leather tans, off-whites and deep reds. A brand that nods to coaching inns without feeling costumed.',
+        direction: 'Heritage-forward with a modern twist. Editorial typography paired with a crest-led mark. Saddle-leather tans, off-whites and deep reds — nodding to coaching inns without feeling costumed.',
         image:
           'https://images.unsplash.com/photo-1757228727900-7758efc55404?crop=entropy&cs=srgb&fm=jpg&q=85',
       },
       {
         name: 'Concept 03 — Press & Paper',
-        direction: 'A system led by print. Letterpress menus, numbered editions, collectable coasters. A quieter, craft-first route that rewards the guests who look twice.',
+        direction: 'A system led by print. Letterpress menus, numbered editions, collectable coasters. A quieter, craft-first route that rewards guests who look twice.',
         image:
           'https://images.unsplash.com/photo-1634573595357-de8a4448c573?crop=entropy&cs=srgb&fm=jpg&q=85',
       },
@@ -296,50 +298,50 @@ export const proposals = {
     ],
     investment: {
       currency: '£',
-      note: 'All tiers include the full 4D Framework (Discover → Develop). Prices exclude VAT and third-party costs (photography, printing, ads).',
+      note: 'All tiers include the full 4D Framework (Discover → Develop). Prices exclude VAT and third-party costs (photography, ad spend, third-party booking software).',
       tiers: [
         {
-          name: 'Essential',
+          name: 'Essentials',
           tag: 'Launch-ready',
-          price: '8,400',
+          price: '6,800',
           cadence: 'project',
-          summary: 'Core brand, print essentials and a single-page launch site.',
+          summary: 'Refreshed digital identity and a bookable single-page site — built to launch fast.',
           includes: [
-            'Brand strategy & one identity direction',
-            'Logo, wordmark & core guidelines',
-            'Menu, coasters & 2 print items',
-            'Single-page website (up to 8 sections)',
+            'Brand audit & one identity direction',
+            'Logo, wordmark & digital toolkit',
+            'Single-page bookable website',
+            'Google Business Profile setup',
             '30-day post-launch support',
           ],
           featured: false,
         },
         {
-          name: 'Signature',
+          name: 'Growth',
           tag: 'Recommended',
-          price: '14,800',
+          price: '12,400',
           cadence: 'project',
-          summary: 'Full system, bookable website and a coordinated launch.',
+          summary: 'Full rebrand, bespoke website and a 90-day local SEO programme to win the search results.',
           includes: [
             'Strategy + two identity directions',
-            'Complete brand system & guidelines',
-            'Print suite (menus, coasters, signage)',
-            'Responsive website + booking flow',
+            'Full digital brand system',
+            'Bespoke multi-page website + booking flow',
+            'Local SEO setup & 90-day execution plan',
             'Launch campaign (social, email, press)',
             '60-day post-launch support',
           ],
           featured: true,
         },
         {
-          name: 'Enterprise',
+          name: 'Elite',
           tag: 'Full partnership',
-          price: '24,500',
+          price: '22,800',
           cadence: 'project + retainer',
-          summary: 'Signature tier plus 6 months of ongoing growth partnership.',
+          summary: 'Growth tier plus six months of ongoing creative direction, SEO and analytics.',
           includes: [
-            'Everything in Signature',
+            'Everything in Growth',
             'Photography direction & shoot',
             'Interior signage & wayfinding',
-            'Monthly strategy & creative retainer (6 months)',
+            'Monthly creative & SEO retainer (6 months)',
             'Analytics, reporting & iteration',
             'Priority access, flexible scope',
           ],
@@ -355,16 +357,26 @@ export const proposals = {
   },
 };
 
+// Backwards-compatibility — old preview link still works
+proposals['the-hobby-horse'] = proposals['hobby-horse'];
+
 export const getProposal = (slug) => proposals[slug] || null;
 
-export const acceptProposalMock = (slug, tierName) => {
+// Unified proposal action recorder. action = 'approve' | 'revision' | 'decline'
+export const recordProposalActionMock = ({ slug, action, tier = null, payload = {} }) => {
   const record = {
     slug,
-    tier: tierName,
-    acceptedAt: new Date().toISOString(),
+    action,
+    tier,
+    payload,
+    actedAt: new Date().toISOString(),
   };
-  const existing = JSON.parse(localStorage.getItem('rm_proposal_acceptances') || '[]');
+  const existing = JSON.parse(localStorage.getItem('rm_proposal_actions') || '[]');
   existing.push(record);
-  localStorage.setItem('rm_proposal_acceptances', JSON.stringify(existing));
+  localStorage.setItem('rm_proposal_actions', JSON.stringify(existing));
   return new Promise((resolve) => setTimeout(() => resolve({ ok: true }), 600));
 };
+
+// Legacy shim
+export const acceptProposalMock = (slug, tierName) =>
+  recordProposalActionMock({ slug, action: 'approve', tier: tierName });

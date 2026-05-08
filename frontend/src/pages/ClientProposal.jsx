@@ -10,8 +10,16 @@ import {
   MessageCircle,
   Loader2,
   Lock,
+  X,
+  HelpCircle,
+  XOctagon,
+  PartyPopper,
 } from 'lucide-react';
-import { getProposal, acceptProposalMock, brand } from '../mock';
+import confetti from 'canvas-confetti';
+import { getProposal, recordProposalActionMock, brand } from '../mock';
+import { Input } from '../components/ui/input';
+import { Textarea } from '../components/ui/textarea';
+import { Label } from '../components/ui/label';
 import { toast } from 'sonner';
 
 const NotFound = () => (
@@ -44,26 +52,112 @@ const ClientProposal = () => {
   const [selectedTier, setSelectedTier] = useState(
     proposal ? proposal.investment.tiers.find((t) => t.featured)?.name || proposal.investment.tiers[0].name : null
   );
-  const [confirming, setConfirming] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
+
+  // Action flow state
+  // null | 'approve-pending' | 'approved' | 'declined-done'
+  const [flow, setFlow] = useState(null);
+  const [openPanel, setOpenPanel] = useState(null); // 'revision' | 'decline' | null
+  const [revisionForm, setRevisionForm] = useState({ name: '', question: '' });
+  const [declineFeedback, setDeclineFeedback] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   if (!proposal) return <NotFound />;
+
+  const fireConfetti = () => {
+    const colors = ['#e3494e', '#f2ece2', '#d4a554', '#ffffff'];
+    confetti({
+      particleCount: 90,
+      spread: 70,
+      angle: 60,
+      origin: { x: 0.1, y: 0.7 },
+      colors,
+      scalar: 1.1,
+      ticks: 220,
+    });
+    confetti({
+      particleCount: 90,
+      spread: 70,
+      angle: 120,
+      origin: { x: 0.9, y: 0.7 },
+      colors,
+      scalar: 1.1,
+      ticks: 220,
+    });
+    setTimeout(() => {
+      confetti({
+        particleCount: 140,
+        spread: 100,
+        startVelocity: 38,
+        origin: { x: 0.5, y: 0.3 },
+        colors,
+        ticks: 260,
+      });
+    }, 280);
+  };
 
   const handleDownloadPdf = () => {
     toast.message('Opening print dialog — choose “Save as PDF”.');
     setTimeout(() => window.print(), 300);
   };
 
-  const handleConfirm = async () => {
-    setConfirming(true);
+  const handleApprove = async () => {
+    setFlow('approve-pending');
+    setOpenPanel(null);
     try {
-      await acceptProposalMock(proposal.slug, selectedTier);
-      setConfirmed(true);
-      toast.success(`Thank you — your acceptance of the “${selectedTier}” tier has been logged.`);
+      await recordProposalActionMock({
+        slug: proposal.slug,
+        action: 'approve',
+        tier: selectedTier,
+      });
+      fireConfetti();
+      setFlow('approved');
+      toast.success(`Approval logged — Rhys has been notified. Tier: ${selectedTier}.`);
     } catch {
+      setFlow(null);
       toast.error('Something went wrong. Please email or WhatsApp to confirm instead.');
+    }
+  };
+
+  const handleRevisionSubmit = async (e) => {
+    e.preventDefault();
+    if (!revisionForm.question.trim()) {
+      toast.error('Add a quick note so Rhys knows what to revise.');
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await recordProposalActionMock({
+        slug: proposal.slug,
+        action: 'revision',
+        tier: selectedTier,
+        payload: revisionForm,
+      });
+      toast.success('Sent — Rhys will reply within one working day.');
+      setRevisionForm({ name: '', question: '' });
+      setOpenPanel(null);
+    } catch {
+      toast.error('Something went wrong. Try WhatsApp instead.');
     } finally {
-      setConfirming(false);
+      setSubmitting(false);
+    }
+  };
+
+  const handleDeclineSubmit = async () => {
+    setSubmitting(true);
+    try {
+      await recordProposalActionMock({
+        slug: proposal.slug,
+        action: 'decline',
+        tier: selectedTier,
+        payload: { feedback: declineFeedback.trim() },
+      });
+      setFlow('declined-done');
+      setOpenPanel(null);
+      toast.success('Thank you — your feedback has been logged.');
+    } catch {
+      toast.error('Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -156,6 +250,11 @@ const ClientProposal = () => {
               <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2] print:text-black">
                 What we’re <span className="text-[#e3494e]">setting out to do.</span>
               </h2>
+              {proposal.scope.summary && (
+                <p className="mt-5 text-[14px] text-[#c9c2b5] print:text-neutral-700 font-light leading-relaxed max-w-md">
+                  {proposal.scope.summary}
+                </p>
+              )}
             </div>
             <div className="md:col-span-8 space-y-12">
               {/* Goals */}
@@ -341,7 +440,7 @@ const ClientProposal = () => {
           </ul>
         </section>
 
-        {/* Actions */}
+        {/* Actions — 3-button flow */}
         <section className="py-16 md:py-24 relative overflow-hidden print:hidden">
           <div
             aria-hidden
@@ -351,77 +450,321 @@ const ClientProposal = () => {
                 'radial-gradient(closest-side, rgba(227,73,78,0.45), rgba(227,73,78,0) 70%)',
             }}
           />
-          <div className="relative text-center max-w-3xl mx-auto">
-            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-              § Next step
-            </div>
-            <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2]">
-              Ready to move forward?
-            </h2>
-            <p className="mt-5 text-[15px] text-[#c9c2b5] font-light max-w-xl mx-auto leading-relaxed">
-              Your selected tier:{' '}
-              <span className="text-[#e3494e] font-sub text-[12px]">
-                {selectedTier?.toUpperCase()}
-              </span>
-              . Confirming below logs your acceptance — I’ll follow up personally within 24 hours
-              with the engagement agreement and first invoice.
-            </p>
+          <div className="relative max-w-3xl mx-auto">
+            {/* Heading swaps based on flow state */}
+            {flow === 'approved' ? (
+              <div className="text-center">
+                <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#9cd3af] mb-4">
+                  <PartyPopper className="w-3.5 h-3.5" />
+                  Approved
+                </div>
+                <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2]">
+                  Welcome aboard <span className="text-[#e3494e]">— let’s get to work.</span>
+                </h2>
+                <p className="mt-5 text-[15px] text-[#c9c2b5] font-light max-w-xl mx-auto leading-relaxed">
+                  Your approval of the{' '}
+                  <span className="text-[#e3494e] font-sub text-[12px]">
+                    {selectedTier?.toUpperCase()}
+                  </span>{' '}
+                  tier has been logged and Rhys has been notified. You’ll receive the engagement
+                  agreement and first invoice within 24 hours.
+                </p>
+                <button
+                  onClick={handleDownloadPdf}
+                  className="mt-8 inline-flex items-center justify-center gap-2 bg-transparent border border-[#2a2a2a] hover:border-[#e3494e] hover:text-[#e3494e] text-[#f2ece2] rounded-full h-12 px-6 font-sub text-[11px] transition-colors"
+                >
+                  <Download className="w-4 h-4" />
+                  Download a PDF copy
+                </button>
+              </div>
+            ) : flow === 'declined-done' ? (
+              <div className="text-center">
+                <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
+                  § Proposal declined
+                </div>
+                <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2]">
+                  Thank you for the <span className="text-[#e3494e]">honest read.</span>
+                </h2>
+                <p className="mt-5 text-[15px] text-[#c9c2b5] font-light max-w-xl mx-auto leading-relaxed">
+                  Your decision and any feedback have been logged. If anything changes, the
+                  proposal stays valid until {proposal.validUntil}.
+                </p>
+              </div>
+            ) : (
+              <div className="text-center">
+                <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
+                  § Next step
+                </div>
+                <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2]">
+                  Ready to move forward?
+                </h2>
+                <p className="mt-5 text-[15px] text-[#c9c2b5] font-light max-w-xl mx-auto leading-relaxed">
+                  Your selected tier:{' '}
+                  <span className="text-[#e3494e] font-sub text-[12px]">
+                    {selectedTier?.toUpperCase()}
+                  </span>
+                  . Choose how you’d like to respond — Rhys is notified the moment you do.
+                </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
-              <button
-                onClick={handleConfirm}
-                disabled={confirming || confirmed}
-                className={`inline-flex items-center justify-center gap-2 rounded-full h-14 px-8 font-sub text-[12px] transition-colors ${
-                  confirmed
-                    ? 'bg-[#1f3f2a] border border-[#2b5a3a] text-[#9cd3af]'
-                    : 'bg-[#e3494e] hover:bg-[#c93b3f] text-white disabled:opacity-60'
-                }`}
-              >
-                {confirmed ? (
-                  <>
-                    <Check className="w-4 h-4" />
-                    Acceptance logged
-                  </>
-                ) : confirming ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" /> Confirming…
-                  </>
-                ) : (
-                  <>
-                    Confirm & Proceed
-                    <ArrowUpRight className="w-4 h-4" />
-                  </>
-                )}
-              </button>
+                {/* The 3 buttons */}
+                <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                  {/* 1. Approve — Primary */}
+                  <button
+                    onClick={handleApprove}
+                    disabled={flow === 'approve-pending'}
+                    className="group relative inline-flex items-center justify-center gap-2 rounded-full h-14 px-6 bg-[#e3494e] hover:bg-[#c93b3f] text-white font-sub text-[12px] disabled:opacity-70 transition-colors lg:order-1 sm:col-span-2 lg:col-span-1"
+                  >
+                    {flow === 'approve-pending' ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" /> Approving…
+                      </>
+                    ) : (
+                      <>
+                        <Check className="w-4 h-4" />
+                        Approve Proposal
+                        <ArrowUpRight className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                      </>
+                    )}
+                  </button>
 
-              <button
-                onClick={handleDownloadPdf}
-                className="inline-flex items-center justify-center gap-2 bg-transparent border border-[#2a2a2a] hover:border-[#e3494e] hover:text-[#e3494e] text-[#f2ece2] rounded-full h-14 px-8 font-sub text-[12px] transition-colors"
-              >
-                <Download className="w-4 h-4" />
-                Download PDF
-              </button>
-            </div>
+                  {/* 2. Request Revisions — Secondary */}
+                  <button
+                    onClick={() =>
+                      setOpenPanel(openPanel === 'revision' ? null : 'revision')
+                    }
+                    aria-expanded={openPanel === 'revision'}
+                    className={`inline-flex items-center justify-center gap-2 rounded-full h-14 px-6 font-sub text-[12px] border transition-colors lg:order-2 ${
+                      openPanel === 'revision'
+                        ? 'bg-[#141414] border-[#e3494e] text-[#e3494e]'
+                        : 'bg-transparent border-[#2a2a2a] text-[#f2ece2] hover:border-[#e3494e] hover:text-[#e3494e]'
+                    }`}
+                  >
+                    <HelpCircle className="w-4 h-4" />
+                    Request Revisions
+                  </button>
 
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[12px] text-[#8a8378] font-mono uppercase tracking-[0.18em]">
-              <a
-                href={mailLink}
-                className="inline-flex items-center gap-2 hover:text-[#e3494e] transition-colors"
-              >
-                <Mail className="w-3.5 h-3.5" />
-                {brand.email}
-              </a>
-              <span className="w-1 h-1 rounded-full bg-[#3a3a3a]" />
-              <a
-                href={waLink}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 hover:text-[#e3494e] transition-colors"
-              >
-                <MessageCircle className="w-3.5 h-3.5" />
-                {brand.whatsappDisplay}
-              </a>
-            </div>
+                  {/* 3. Decline — Tertiary */}
+                  <button
+                    onClick={() =>
+                      setOpenPanel(openPanel === 'decline' ? null : 'decline')
+                    }
+                    aria-expanded={openPanel === 'decline'}
+                    className={`inline-flex items-center justify-center gap-2 rounded-full h-14 px-6 font-sub text-[11px] transition-colors lg:order-3 ${
+                      openPanel === 'decline'
+                        ? 'text-[#e3494e]'
+                        : 'text-[#8a8378] hover:text-[#e3494e]'
+                    }`}
+                  >
+                    <XOctagon className="w-3.5 h-3.5" />
+                    Decline
+                  </button>
+                </div>
+
+                {/* Inline panel — Request Revisions */}
+                <div
+                  className={`grid transition-all duration-700 ease-out text-left ${
+                    openPanel === 'revision'
+                      ? 'grid-rows-[1fr] opacity-100 mt-8'
+                      : 'grid-rows-[0fr] opacity-0 mt-0 pointer-events-none'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <form
+                      onSubmit={handleRevisionSubmit}
+                      className="bg-[#141414] border border-[#2a2a2a] rounded-sm p-6 md:p-8 relative"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setOpenPanel(null)}
+                        aria-label="Close revisions panel"
+                        className="absolute top-4 right-4 w-9 h-9 inline-flex items-center justify-center rounded-full border border-[#2a2a2a] text-[#8a8378] hover:text-[#e3494e] hover:border-[#e3494e] transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                      <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#e3494e] mb-2">
+                        § Ask a question or request a revision
+                      </div>
+                      <h3 className="font-display uppercase tracking-tight text-xl md:text-2xl text-[#f2ece2] font-bold">
+                        What would you like changed?
+                      </h3>
+                      <p className="mt-2 text-[13px] text-[#a8a195] font-light max-w-lg">
+                        A line or two is plenty. If it’s easier to talk it through,{' '}
+                        <a
+                          href={waLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-[#e3494e] hover:underline"
+                        >
+                          message on WhatsApp
+                        </a>{' '}
+                        instead.
+                      </p>
+
+                      <div className="mt-6 space-y-5">
+                        <div className="space-y-2">
+                          <Label className="font-sub text-[11px] text-[#8a8378]">
+                            Your name (optional)
+                          </Label>
+                          <Input
+                            value={revisionForm.name}
+                            onChange={(e) =>
+                              setRevisionForm({ ...revisionForm, name: e.target.value })
+                            }
+                            placeholder="Harriet Ashworth"
+                            className="bg-transparent border-0 border-b border-[#2a2a2a] rounded-none h-11 px-0 text-[#f2ece2] placeholder:text-[#5c564c] focus-visible:ring-0 focus-visible:border-[#e3494e]"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label className="font-sub text-[11px] text-[#8a8378]">
+                            Your question or revision request
+                          </Label>
+                          <Textarea
+                            value={revisionForm.question}
+                            onChange={(e) =>
+                              setRevisionForm({ ...revisionForm, question: e.target.value })
+                            }
+                            placeholder="e.g. Can we talk through Concept 02 vs 04? And how does the SEO retainer fit in the Growth tier?"
+                            rows={4}
+                            className="bg-transparent border border-[#2a2a2a] rounded-sm text-[#f2ece2] placeholder:text-[#5c564c] focus-visible:ring-0 focus-visible:border-[#e3494e]"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                        <a
+                          href={waLink}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center justify-center gap-2 font-sub text-[11px] text-[#8a8378] hover:text-[#e3494e] transition-colors"
+                        >
+                          <MessageCircle className="w-4 h-4" />
+                          Or jump straight to WhatsApp
+                        </a>
+                        <button
+                          type="submit"
+                          disabled={submitting}
+                          className="inline-flex items-center justify-center gap-2 bg-[#e3494e] hover:bg-[#c93b3f] disabled:opacity-60 text-white rounded-full h-12 px-6 font-sub text-[11px] transition-colors"
+                        >
+                          {submitting ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin" /> Sending…
+                            </>
+                          ) : (
+                            <>
+                              Send to Rhys
+                              <ArrowUpRight className="w-4 h-4" />
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                {/* Inline panel — Decline */}
+                <div
+                  className={`grid transition-all duration-700 ease-out text-left ${
+                    openPanel === 'decline'
+                      ? 'grid-rows-[1fr] opacity-100 mt-8'
+                      : 'grid-rows-[0fr] opacity-0 mt-0 pointer-events-none'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="bg-[#141414] border border-[#2a2a2a] rounded-sm p-6 md:p-8 relative">
+                      <button
+                        type="button"
+                        onClick={() => setOpenPanel(null)}
+                        aria-label="Close decline panel"
+                        className="absolute top-4 right-4 w-9 h-9 inline-flex items-center justify-center rounded-full border border-[#2a2a2a] text-[#8a8378] hover:text-[#e3494e] hover:border-[#e3494e] transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                      <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-2">
+                        § Not the right fit?
+                      </div>
+                      <h3 className="font-display uppercase tracking-tight text-xl md:text-2xl text-[#f2ece2] font-bold">
+                        A quick line on why?
+                      </h3>
+                      <p className="mt-2 text-[13px] text-[#a8a195] font-light max-w-lg">
+                        Honest feedback genuinely helps. One sentence is enough — pricing,
+                        timing, scope, or something else entirely.
+                      </p>
+
+                      <div className="mt-5 space-y-2">
+                        <Label className="font-sub text-[11px] text-[#8a8378]">
+                          Brief feedback (optional)
+                        </Label>
+                        <Textarea
+                          value={declineFeedback}
+                          onChange={(e) => setDeclineFeedback(e.target.value)}
+                          placeholder="e.g. Pricing is over budget for this stage / timing isn’t right / decided to keep in-house…"
+                          rows={3}
+                          className="bg-transparent border border-[#2a2a2a] rounded-sm text-[#f2ece2] placeholder:text-[#5c564c] focus-visible:ring-0 focus-visible:border-[#e3494e]"
+                        />
+                      </div>
+
+                      <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                        <button
+                          type="button"
+                          onClick={() => setOpenPanel(null)}
+                          className="inline-flex items-center justify-center gap-2 font-sub text-[11px] text-[#8a8378] hover:text-[#f2ece2] transition-colors"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleDeclineSubmit}
+                          disabled={submitting}
+                          className="inline-flex items-center justify-center gap-2 bg-transparent border border-[#3a3a3a] hover:border-[#e3494e] hover:text-[#e3494e] disabled:opacity-60 text-[#d8d2c6] rounded-full h-12 px-6 font-sub text-[11px] transition-colors"
+                        >
+                          {submitting ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin" /> Sending…
+                            </>
+                          ) : (
+                            <>
+                              Send & decline
+                              <ArrowUpRight className="w-4 h-4" />
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Quiet meta — always visible while not approved/declined */}
+            {flow !== 'approved' && flow !== 'declined-done' && (
+              <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[11px] text-[#8a8378] font-mono uppercase tracking-[0.18em]">
+                <button
+                  onClick={handleDownloadPdf}
+                  className="inline-flex items-center gap-2 hover:text-[#e3494e] transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download PDF
+                </button>
+                <span className="w-1 h-1 rounded-full bg-[#3a3a3a]" />
+                <a
+                  href={mailLink}
+                  className="inline-flex items-center gap-2 hover:text-[#e3494e] transition-colors"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  {brand.email}
+                </a>
+                <span className="w-1 h-1 rounded-full bg-[#3a3a3a]" />
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 hover:text-[#e3494e] transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  {brand.whatsappDisplay}
+                </a>
+              </div>
+            )}
           </div>
         </section>
 
