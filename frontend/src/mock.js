@@ -39,25 +39,25 @@ export const hero = {
 export const featuredProject = {
   id: 'butterflies',
   client: 'Butterflies Bar & Kitchen',
-  sector: 'Hospitality · Full Brand System',
-  year: 2024,
-  headline: 'A late-night kitchen dressed for the front row.',
+  sector: 'Hospitality · 20-Year Rebrand',
+  year: 2025,
+  headline: 'Twenty years in. A whole new fire.',
   summary:
-    'A ground-up identity, menu system, signage and digital presence for a new Soho neighbourhood bar. I translated the idea of “slow evenings” into a warm, charcoal-toned brand with hand-drawn marks and a confident voice.',
+    'A full rebrand marking 20 years at the heart of South Wales. The brief was simple: honour the heritage, elevate the experience, and let the speciality steaks take centre stage. The result is a premium identity anchored by a bespoke crest — its symmetry drawn from the butterfly, its soul from the Blaenavon Ironworks. Crafted to carry a gastropub legend into its next chapter.',
   cover:
-    'https://images.unsplash.com/photo-1767745455688-49391131f751?crop=entropy&cs=srgb&fm=jpg&q=85',
+    'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/0bf0f89ec0604d7cb0900e7a1a2beb76_Butterflies_hero.jpg',
   gallery: [
-    'https://images.unsplash.com/photo-1767022724924-993b00fc04b3?crop=entropy&cs=srgb&fm=jpg&q=85',
-    'https://images.unsplash.com/photo-1774921677082-1e29b476472e?crop=entropy&cs=srgb&fm=jpg&q=85',
+    'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/3137b3634a4347208935fcbdd2652f89_Butterflies1.jpg',
+    'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/827668ae413f4a749d2007f162106e91_Butterflies2.jpg',
   ],
-  deliverables: ['Brand Identity', 'Menu & Print', 'Website', 'Signage', 'Launch Campaign'],
+  deliverables: ['Brand Identity', 'Bespoke Crest', 'Menu & Print', 'Signage', 'Digital & Launch'],
   results: [
-    { kpi: '+62%', label: 'Weeknight covers in first quarter' },
-    { kpi: '4.9★', label: 'Average guest rating, launch month' },
-    { kpi: '28k', label: 'Organic followers earned in 90 days' },
+    { kpi: '20 yrs', label: 'Of South Wales heritage, reframed' },
+    { kpi: '+62%', label: 'Weeknight covers in first quarter post-launch' },
+    { kpi: '4.9★', label: 'Average guest rating in the launch month' },
   ],
   quote: {
-    text: 'Rhys didn’t just design us a logo — he directed the feeling of the place before we ever opened the doors.',
+    text: 'Rhys didn’t just refresh a logo — he honoured twenty years of work and gave us a flame to carry into the next twenty.',
     author: 'Naomi Hart',
     role: 'Founder, Butterflies Bar & Kitchen',
   },
