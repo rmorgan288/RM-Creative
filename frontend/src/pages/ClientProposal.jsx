@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   ArrowUpRight,
@@ -16,7 +16,8 @@ import {
   PartyPopper,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { getProposal, recordProposalActionMock, brand, formatProposalDate, formatValidUntil } from '../mock';
+import { getProposal, brand, formatProposalDate, formatValidUntil } from '../mock';
+import { apiGetProposal, apiPostAction, resolveAsset } from '../lib/api';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
@@ -48,10 +49,10 @@ const NotFound = () => (
 
 const ClientProposal = () => {
   const { slug } = useParams();
-  const proposal = getProposal(slug);
-  const [selectedTier, setSelectedTier] = useState(
-    proposal ? proposal.investment.tiers.find((t) => t.featured)?.name || proposal.investment.tiers[0].name : null
-  );
+  const [proposal, setProposal] = useState(null);
+  const [fetching, setFetching] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+  const [selectedTier, setSelectedTier] = useState(null);
 
   // Action flow state
   // null | 'approve-pending' | 'approved' | 'declined-done'
@@ -61,7 +62,65 @@ const ClientProposal = () => {
   const [declineFeedback, setDeclineFeedback] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  if (!proposal) return <NotFound />;
+  // Load proposal from API; fall back to local mock if API is unreachable
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      setFetching(true);
+      setNotFound(false);
+      try {
+        const remote = await apiGetProposal(slug);
+        if (cancelled) return;
+        setProposal(remote);
+      } catch (e) {
+        // 404 → genuinely missing
+        if (e?.response?.status === 404) {
+          // Try mock fallback for legacy slug
+          const fallback = getProposal(slug);
+          if (fallback) {
+            if (!cancelled) setProposal(fallback);
+          } else {
+            if (!cancelled) setNotFound(true);
+          }
+        } else {
+          // Network/other error — fall back to local mock so preview never breaks
+          const fallback = getProposal(slug);
+          if (fallback) {
+            if (!cancelled) setProposal(fallback);
+          } else {
+            if (!cancelled) setNotFound(true);
+          }
+        }
+      } finally {
+        if (!cancelled) setFetching(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  // Once proposal loads, pick default tier
+  useEffect(() => {
+    if (!proposal) return;
+    const tiers = proposal.investment?.tiers || [];
+    const featured = tiers.find((t) => t.featured) || tiers[0];
+    if (featured) setSelectedTier(featured.name);
+  }, [proposal]);
+
+  if (fetching) {
+    return (
+      <div className="min-h-screen bg-[#0f0f0f] text-[#f2ece2] flex items-center justify-center">
+        <Loader2 className="w-5 h-5 animate-spin mr-2" />
+        <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
+          Loading proposal…
+        </span>
+      </div>
+    );
+  }
+
+  if (notFound || !proposal) return <NotFound />;
 
   const fireConfetti = () => {
     const colors = ['#e3494e', '#f2ece2', '#d4a554', '#ffffff'];
@@ -104,8 +163,7 @@ const ClientProposal = () => {
     setFlow('approve-pending');
     setOpenPanel(null);
     try {
-      await recordProposalActionMock({
-        slug: proposal.slug,
+      await apiPostAction(proposal.slug, {
         action: 'approve',
         tier: selectedTier,
       });
@@ -126,8 +184,7 @@ const ClientProposal = () => {
     }
     setSubmitting(true);
     try {
-      await recordProposalActionMock({
-        slug: proposal.slug,
+      await apiPostAction(proposal.slug, {
         action: 'revision',
         tier: selectedTier,
         payload: revisionForm,
@@ -145,8 +202,7 @@ const ClientProposal = () => {
   const handleDeclineSubmit = async () => {
     setSubmitting(true);
     try {
-      await recordProposalActionMock({
-        slug: proposal.slug,
+      await apiPostAction(proposal.slug, {
         action: 'decline',
         tier: selectedTier,
         payload: { feedback: declineFeedback.trim() },
@@ -215,7 +271,7 @@ const ClientProposal = () => {
         {proposal.coverImage && (
           <>
             <img
-              src={proposal.coverImage}
+              src={resolveAsset(proposal.coverImage)}
               alt=""
               aria-hidden="true"
               className="absolute inset-0 w-full h-full object-cover print:hidden"
@@ -359,7 +415,7 @@ const ClientProposal = () => {
               <article key={i} className="group">
                 <div className="img-tile rounded-sm overflow-hidden">
                   <img
-                    src={c.image}
+                    src={resolveAsset(c.image)}
                     alt={c.name}
                     className="w-full h-[44vh] object-cover"
                     loading="lazy"
