@@ -34,7 +34,7 @@ const ProjectGrid = () => {
               <div className="mt-6 flex items-start justify-between gap-6">
                 <div>
                   <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
-                    {p.sector} · {p.year}
+                    {p.sector}
                   </div>
                   <h3 className="mt-2 font-display uppercase tracking-tight text-xl md:text-2xl text-[#f2ece2] group-hover:text-[#e3494e] transition-colors duration-500 font-bold">
                     {p.client}

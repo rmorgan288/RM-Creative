@@ -65,15 +65,15 @@ export const featuredProject = {
 
 export const projects = [
   {
-    id: 'aurora',
-    client: 'Aurora Skin Co.',
-    sector: 'Beauty · Brand Identity',
-    year: 2024,
+    id: 'disney-royal-mint',
+    client: 'Disney x The Royal Mint',
+    sector: 'Precious Metals · Packaging',
+    year: null,
     thumbnail:
-      'https://images.unsplash.com/photo-1759794108525-94ff060da692?crop=entropy&cs=srgb&fm=jpg&q=85',
-    tags: ['Identity', 'Packaging', 'Art Direction'],
+      'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/1518230ac1424c4abd9a4c323cc8903c_Disney and royal mint@3x-50.jpg',
+    tags: ['Campaign', 'Packaging', 'Art Direction'],
     blurb:
-      'A quiet, clinical beauty brand with a cult following. Built around ritual, not noise.',
+      'Where royal craftsmanship meets childhood magic. Packaging and campaign work for a limited edition Winnie the Pooh collector coin series designed to stop scrolls, spark nostalgia and sell out fast.',
   },
   {
     id: 'meridian',

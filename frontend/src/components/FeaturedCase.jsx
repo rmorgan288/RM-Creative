@@ -19,7 +19,7 @@ const FeaturedCase = () => {
           </div>
           <div className="hidden md:block text-right">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
-              {p.sector} · {p.year}
+              {p.sector}
             </div>
           </div>
         </div>
