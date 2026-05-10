@@ -1,7 +1,8 @@
 import React from 'react';
-import { brand, about, processSteps } from '../mock';
+import { useSiteContent } from '../contexts/SiteContentContext';
 
 const About = () => {
+  const { brand, about, processSteps } = useSiteContent();
   const portrait =
     'https://images.unsplash.com/photo-1600896997793-b8ed3459a17f?crop=entropy&cs=srgb&fm=jpg&q=85';
   const workspace =

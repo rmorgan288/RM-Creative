@@ -76,4 +76,10 @@ export const apiUploadImage = (file, onProgress) => {
 export const apiPostContact = (body) =>
   client.post('/contact', body).then((r) => r.data);
 
+// Site content (homepage CMS)
+export const apiGetSiteContent = () =>
+  client.get('/site-content').then((r) => r.data);
+export const apiUpdateSiteContent = (body) =>
+  client.put('/site-content', body).then((r) => r.data);
+
 export default client;

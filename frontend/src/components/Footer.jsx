@@ -1,7 +1,8 @@
 import React from 'react';
-import { brand, navigation } from '../mock';
+import { useSiteContent } from '../contexts/SiteContentContext';
 
 const Footer = () => {
+  const { brand, navigation } = useSiteContent();
   const year = new Date().getFullYear();
   return (
     <footer className="bg-[#0a0a0a] border-t border-[#1f1f1f] pt-20 pb-10">

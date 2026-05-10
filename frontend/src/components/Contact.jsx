@@ -1,12 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { ArrowUpRight, Mail, MessageCircle, Loader2, X } from 'lucide-react';
-import { brand, submitContactMock } from '../mock';
+import { useSiteContent } from '../contexts/SiteContentContext';
+import { apiPostContact } from '../lib/api';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { toast } from 'sonner';
 
 const Contact = () => {
+  const { brand } = useSiteContent();
   const [formOpen, setFormOpen] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
@@ -40,7 +42,7 @@ const Contact = () => {
     }
     setSubmitting(true);
     try {
-      await submitContactMock(form);
+      await apiPostContact(form);
       toast.success('Message received. I’ll reply within two working days.');
       setForm({ name: '', email: '', message: '' });
       // Collapse the form again after a short pause

@@ -1,8 +1,9 @@
 import React from 'react';
-import { services, retainer } from '../mock';
+import { useSiteContent } from '../contexts/SiteContentContext';
 import { ArrowUpRight, Repeat } from 'lucide-react';
 
 const Services = () => {
+  const { services, retainer } = useSiteContent();
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };

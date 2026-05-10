@@ -16,8 +16,9 @@ import {
   PartyPopper,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { getProposal, brand, formatProposalDate, formatValidUntil } from '../mock';
+import { getProposal, formatProposalDate, formatValidUntil } from '../mock';
 import { apiGetProposal, apiPostAction, resolveAsset } from '../lib/api';
+import { useSiteContent } from '../contexts/SiteContentContext';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
@@ -49,6 +50,7 @@ const NotFound = () => (
 
 const ClientProposal = () => {
   const { slug } = useParams();
+  const { brand } = useSiteContent();
   const [proposal, setProposal] = useState(null);
   const [fetching, setFetching] = useState(true);
   const [notFound, setNotFound] = useState(false);

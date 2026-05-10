@@ -14,6 +14,9 @@ import {
   XOctagon,
   Inbox,
   Mail,
+  LayoutGrid,
+  FileText,
+  ArrowUpRight,
 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import {
@@ -142,10 +145,10 @@ const Admin = () => {
         <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-3">
-              § Proposals Manager
+              § Studio Control Room
             </div>
             <h1 className="font-display-xl text-4xl md:text-5xl">
-              Studio <span className="text-[#e3494e]">control room.</span>
+              Welcome <span className="text-[#e3494e]">back.</span>
             </h1>
           </div>
           <Link
@@ -154,6 +157,48 @@ const Admin = () => {
           >
             <Plus className="w-4 h-4" />
             New proposal
+          </Link>
+        </div>
+
+        {/* Quick-access cards */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-10">
+          <Link
+            to="/admin/site-content"
+            className="group bg-[#141414] border border-[#2a2a2a] hover:border-[#e3494e] rounded-sm p-6 transition-colors flex items-start gap-4"
+          >
+            <span className="w-10 h-10 rounded-full bg-[#0f0f0f] border border-[#2a2a2a] group-hover:bg-[#e3494e] group-hover:border-[#e3494e] inline-flex items-center justify-center text-[#a8a195] group-hover:text-white transition-colors">
+              <LayoutGrid className="w-4 h-4" />
+            </span>
+            <div className="flex-1">
+              <div className="flex items-center justify-between gap-2">
+                <div className="font-display uppercase tracking-wider text-sm text-[#f2ece2] font-bold">
+                  Site Content
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-[#8a8378] group-hover:text-[#e3494e] transition-colors" />
+              </div>
+              <p className="text-[13px] text-[#a8a195] font-light mt-1">
+                Edit the homepage — hero, about, services, 4D framework and contact info.
+              </p>
+            </div>
+          </Link>
+          <Link
+            to="/admin/proposals/new"
+            className="group bg-[#141414] border border-[#2a2a2a] hover:border-[#e3494e] rounded-sm p-6 transition-colors flex items-start gap-4"
+          >
+            <span className="w-10 h-10 rounded-full bg-[#0f0f0f] border border-[#2a2a2a] group-hover:bg-[#e3494e] group-hover:border-[#e3494e] inline-flex items-center justify-center text-[#a8a195] group-hover:text-white transition-colors">
+              <FileText className="w-4 h-4" />
+            </span>
+            <div className="flex-1">
+              <div className="flex items-center justify-between gap-2">
+                <div className="font-display uppercase tracking-wider text-sm text-[#f2ece2] font-bold">
+                  New Proposal
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-[#8a8378] group-hover:text-[#e3494e] transition-colors" />
+              </div>
+              <p className="text-[13px] text-[#a8a195] font-light mt-1">
+                Create a private, gold-standard client proposal page in a few minutes.
+              </p>
+            </div>
           </Link>
         </div>
 

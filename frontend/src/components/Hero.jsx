@@ -1,8 +1,9 @@
 import React from 'react';
 import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
-import { hero, brand, clientsList } from '../mock';
+import { useSiteContent } from '../contexts/SiteContentContext';
 
 const Hero = () => {
+  const { hero, brand, clientsList } = useSiteContent();
   const scrollTo = (id) => {
     const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -40,8 +41,8 @@ const Hero = () => {
         <h1 className="font-display-xl text-[clamp(3.2rem,10vw,10rem)] text-[#f2ece2]">
           {hero.headlineLines.map((line, i) => (
             <span key={i} className="block">
-              {line === 'craft.' ? (
-                <span className="text-[#e3494e]">craft.</span>
+              {i === hero.headlineLines.length - 1 ? (
+                <span className="text-[#e3494e]">{line}</span>
               ) : (
                 line
               )}

@@ -57,6 +57,7 @@ db = client[DB_NAME]
 proposals_col = db["proposals"]
 actions_col = db["proposal_actions"]
 contact_col = db["contact_submissions"]
+site_content_col = db["site_content"]
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("rm-backend")
@@ -369,6 +370,106 @@ async def list_contacts(_: dict = Depends(require_admin)):
 
 
 # ---------------------------------------------------------------------------
+# Routes — site content (homepage CMS)
+# ---------------------------------------------------------------------------
+class HeroContent(BaseModel):
+    headlineLines: List[str] = Field(default_factory=lambda: ["", "", ""])
+    subcopy: str = ""
+
+
+class AboutContent(BaseModel):
+    heading: str = ""
+    headingAccent: str = ""
+    body: List[str] = Field(default_factory=lambda: ["", ""])
+
+
+class ServiceContent(BaseModel):
+    title: str = ""
+    description: str = ""
+
+
+class ProcessContent(BaseModel):
+    title: str = ""
+    body: str = ""
+
+
+class ContactContent(BaseModel):
+    email: str = ""
+    whatsapp: str = ""
+    whatsappDisplay: str = ""
+
+
+class SiteContentModel(BaseModel):
+    hero: HeroContent = Field(default_factory=HeroContent)
+    about: AboutContent = Field(default_factory=AboutContent)
+    services: List[ServiceContent] = Field(default_factory=list)
+    process: List[ProcessContent] = Field(default_factory=list)
+    contact: ContactContent = Field(default_factory=ContactContent)
+
+
+SITE_CONTENT_KEY = "default"
+
+SITE_CONTENT_DEFAULTS: dict = {
+    "key": SITE_CONTENT_KEY,
+    "hero": {
+        "headlineLines": ["Where strategy", "meets", "craft."],
+        "subcopy": "Elevating brands through digital-led marketing, creative strategy, and professional branding services.",
+    },
+    "about": {
+        "heading": "Agency-level expertise.",
+        "headingAccent": "Without the agency overhead.",
+        "body": [
+            "With over 15 years in the creative industry, I bring the strategic weight of a Creative Director to the agility of a freelance partnership. Having led creative for iconic names like Disney, Team GB, and National Grid, I now specialise in bridging the gap between high-level brand strategy and local business growth.",
+            "My approach is straightforward: agency-level expertise without the agency overhead — giving you direct access to a creative all-rounder who prioritises speed, precision, and results.",
+        ],
+    },
+    "services": [
+        {"title": "Brand Identity",     "description": "Logos, wordmarks, systems and guidelines — built to hold up across decades, not just launch week."},
+        {"title": "Web Design & Build", "description": "Considered, fast websites that feel like editorial — for brands where first impression is everything."},
+        {"title": "Creative Direction", "description": "I act as an embedded partner for campaigns, launches and rebrands — one hand on the vision throughout."},
+        {"title": "Content & Campaigns","description": "Social media assets, email marketing, and print/editorial design — built as a system, not one-offs."},
+    ],
+    "process": [
+        {"title": "Discover", "body": "I dive deep into your brief to understand your vision, audience, and market landscape."},
+        {"title": "Define",   "body": "Strategic analysis meets creative concepting to map out a clear, impactful path forward."},
+        {"title": "Deliver",  "body": "From final branding to digital assets, I produce and publish high-quality work ready for the live market."},
+        {"title": "Develop",  "body": "I provide post-launch support and monthly growth retainers, using real-world data and analytics to refine, optimise, and ensure your long-term success."},
+    ],
+    "contact": {
+        "email": "hello@rhysmorgan.studio",
+        "whatsapp": "+447930577757",
+        "whatsappDisplay": "07930 577 757",
+    },
+}
+
+
+@api.get("/site-content")
+async def get_site_content():
+    """Public read of the homepage content."""
+    doc = await site_content_col.find_one({"key": SITE_CONTENT_KEY})
+    if not doc:
+        # Seed and return defaults if missing (defensive)
+        doc = dict(SITE_CONTENT_DEFAULTS)
+        doc["updatedAt"] = _now()
+        await site_content_col.insert_one(doc)
+    return _doc_to_out(doc)
+
+
+@api.put("/site-content")
+async def update_site_content(body: SiteContentModel, _: dict = Depends(require_admin)):
+    update_doc = body.model_dump()
+    update_doc["key"] = SITE_CONTENT_KEY
+    update_doc["updatedAt"] = _now()
+    await site_content_col.update_one(
+        {"key": SITE_CONTENT_KEY},
+        {"$set": update_doc, "$setOnInsert": {"createdAt": _now()}},
+        upsert=True,
+    )
+    final = await site_content_col.find_one({"key": SITE_CONTENT_KEY})
+    return _doc_to_out(final)
+
+
+# ---------------------------------------------------------------------------
 # Routes — uploads
 # ---------------------------------------------------------------------------
 @api.post("/uploads")
@@ -464,7 +565,7 @@ SEED_HOBBY_HORSE: dict = {
 
 @app.on_event("startup")
 async def seed_data():
-    """Seed the gold-standard proposal on first boot so /proposals/hobby-horse keeps working."""
+    """Seed the gold-standard proposal + default site content on first boot."""
     try:
         existing = await proposals_col.find_one({"slug": "hobby-horse"})
         if not existing:
@@ -473,6 +574,14 @@ async def seed_data():
             doc["updatedAt"] = doc["createdAt"]
             await proposals_col.insert_one(doc)
             logger.info("Seeded gold-standard proposal: hobby-horse")
+
+        existing_site = await site_content_col.find_one({"key": SITE_CONTENT_KEY})
+        if not existing_site:
+            doc = dict(SITE_CONTENT_DEFAULTS)
+            doc["createdAt"] = _now()
+            doc["updatedAt"] = doc["createdAt"]
+            await site_content_col.insert_one(doc)
+            logger.info("Seeded default site content")
     except Exception as e:  # pragma: no cover
         logger.exception("Seed failed: %s", e)
 
