@@ -76,37 +76,37 @@ export const projects = [
       'Where royal craftsmanship meets childhood magic. Packaging and campaign work for a limited edition Winnie the Pooh collector coin series designed to stop scrolls, spark nostalgia and sell out fast.',
   },
   {
-    id: 'meridian',
-    client: 'Meridian Watches',
-    sector: 'E-commerce · Digital',
-    year: 2023,
+    id: 'sporttape',
+    client: 'SportTape',
+    sector: 'Sports · Brand',
+    year: null,
     thumbnail:
-      'https://images.unsplash.com/photo-1633869699811-cd4f63049b36?crop=entropy&cs=srgb&fm=jpg&q=85',
-    tags: ['Web Design', 'Shopify', 'Photography Direction'],
+      'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/1b9925cf227e42f08e2cb93c179dd7f7_sporttape ad@3x-50.jpg',
+    tags: ['Art Direction', 'Visual Identity', 'Brand Management'],
     blurb:
-      'A modular storefront for a heritage watchmaker. Designed to feel like a gallery, not a shop.',
+      'From brand guidelines to illustrated how-to guides, a full creative system built for the kinesiology tape market. Bold enough for the gym wall, clear enough for first-time users.',
   },
   {
-    id: 'northfield',
-    client: 'Northfield Studios',
-    sector: 'Architecture · Website',
-    year: 2023,
+    id: 'feel-good-drinks',
+    client: 'Feel Good Drinks Co.',
+    sector: 'Consumer · Campaign',
+    year: null,
     thumbnail:
-      'https://images.unsplash.com/photo-1552925766-63ab07391e02?crop=entropy&cs=srgb&fm=jpg&q=85',
-    tags: ['Art Direction', 'Website', 'Editorial'],
+      'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/9a87aa09683c45feb5e0ff44ab45c7f1_feel good drinks@3x-50.jpg',
+    tags: ['Concept', 'Art Direction', 'Artwork Production'],
     blurb:
-      'An architecture studio with 40 years of work. A website that lets the buildings breathe.',
+      'A public-facing campaign that earned a YCN award for turning natural ingredients into something you actually stop and read at a bus stop.',
   },
   {
-    id: 'volta',
-    client: 'Volta Coffee',
-    sector: 'F&B · Packaging',
-    year: 2022,
+    id: 'personal-illustration',
+    client: 'Personal Illustration',
+    sector: 'Personal · Illustration · 2026',
+    year: null,
     thumbnail:
-      'https://images.unsplash.com/photo-1761936513644-cbc5f3207139?crop=entropy&cs=srgb&fm=jpg&q=85',
-    tags: ['Packaging', 'Identity', 'Copywriting'],
+      'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/32676f6c473641c698db9b444f646945_illustration@3x-50.jpg',
+    tags: ['Concept', 'Illustration', 'Art Direction'],
     blurb:
-      'Single-origin coffee for people who read the label. Charcoal matte, foil-stamped, unmistakable.',
+      'A personal body of work spanning fan art, character studies and digital illustration — from Pokémon and Zelda to Marvel and beyond. Built for the love of it, open for commission.',
   },
 ];
 
@@ -161,19 +161,19 @@ export const testimonials = [
     quote:
       'The rarest kind of designer — strategic, quietly obsessive, and genuinely fun to have in a room.',
     author: 'Daniel Okafor',
-    role: 'CEO, Meridian Watches',
+    role: 'Brand Lead, SportTape',
   },
   {
     quote:
-      'Rhys treated our studio like his own. Three months in, the phone wouldn’t stop ringing.',
+      'Rhys treated our brief like his own. We picked up a YCN award and a campaign people still quote back to us.',
     author: 'Eleanor Voss',
-    role: 'Partner, Northfield Studios',
+    role: 'Marketing Director, Feel Good Drinks Co.',
   },
   {
     quote:
-      'He understood Aurora better than we did. The brand feels like us — just the version we’d been trying to articulate.',
-    author: 'Mira Chen',
-    role: 'Founder, Aurora Skin Co.',
+      'He honoured twenty years of work and gave us a flame to carry into the next twenty.',
+    author: 'Naomi Hart',
+    role: 'Founder, Butterflies Bar & Kitchen',
   },
 ];
 

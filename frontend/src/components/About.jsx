@@ -4,9 +4,9 @@ import { useSiteContent } from '../contexts/SiteContentContext';
 const About = () => {
   const { brand, about, processSteps } = useSiteContent();
   const portrait =
-    'https://images.unsplash.com/photo-1600896997793-b8ed3459a17f?crop=entropy&cs=srgb&fm=jpg&q=85';
+    'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/65ec5b35a32e4023b04d7019de1a4383_rm headshor@3x-50.jpg';
   const workspace =
-    'https://images.pexels.com/photos/8774458/pexels-photo-8774458.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
+    'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/79a3be89222c4f939efb95e34c62dd24_rm headshot 2@3x-50.jpg';
 
   return (
     <section
