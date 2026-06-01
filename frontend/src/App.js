@@ -11,6 +11,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { SiteContentProvider } from './contexts/SiteContentContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Toaster } from './components/ui/sonner';
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         </AuthProvider>
       </BrowserRouter>
       <Toaster position="bottom-right" theme="dark" />
+      <Analytics />
     </div>
   );
 }
