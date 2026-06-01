@@ -93,7 +93,7 @@ const Hero = () => {
       <div className="mt-24 md:mt-28 border-y border-[#1f1f1f] py-8 overflow-hidden relative">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-5">
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
-            § Selected client experience
+            Selected client experience
           </span>
         </div>
         <div className="flex w-max animate-marquee gap-16 whitespace-nowrap">

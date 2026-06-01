@@ -15,7 +15,7 @@ const Services = () => {
         <div className="grid md:grid-cols-12 gap-10 mb-16 md:mb-20">
           <div className="md:col-span-7">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-              § Services
+              Services
             </div>
             <h2 className="font-display-xl text-4xl md:text-6xl text-[#f2ece2]">
               Five ways I can <span className="text-[#e3494e]">support your brand.</span>

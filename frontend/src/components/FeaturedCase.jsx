@@ -11,7 +11,7 @@ const FeaturedCase = () => {
         <div className="flex items-end justify-between mb-10">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-3">
-              § Featured Case Study
+              Featured Case Study
             </div>
             <h2 className="font-display-xl text-4xl md:text-7xl text-[#f2ece2]">
               {p.client}
@@ -86,7 +86,7 @@ const FeaturedCase = () => {
             <span className="text-[#e3494e]">”</span>
           </blockquote>
           <figcaption className="mt-6 font-sub text-[12px] text-[#8a8378]">
-            — {p.quote.author}, {p.quote.role}
+            — {p.quote.client}
           </figcaption>
         </figure>
       </div>

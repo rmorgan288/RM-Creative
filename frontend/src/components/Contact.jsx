@@ -77,7 +77,7 @@ const Contact = () => {
         {/* Section header — centred for a clean editorial feel */}
         <div className="text-center max-w-3xl mx-auto">
           <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-5">
-            § Start a project
+            Start a project
           </div>
           <h2 className="font-display-xl text-4xl md:text-7xl text-[#f2ece2]">
             Let’s make something <br className="hidden md:block" />
@@ -176,7 +176,7 @@ const Contact = () => {
 
               <div className="mb-8">
                 <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#e3494e] mb-3">
-                  § Email enquiry
+                  Email enquiry
                 </div>
                 <h3 className="font-display uppercase tracking-tight text-2xl md:text-3xl text-[#f2ece2] font-bold">
                   Tell me about your project

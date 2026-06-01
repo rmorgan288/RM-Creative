@@ -38,7 +38,7 @@ const About = () => {
           {/* Right: copy */}
           <div className="md:col-span-7 md:pl-6">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-              § {about.eyebrow}
+              {about.eyebrow}
             </div>
             <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2]">
               {about.heading}
@@ -56,7 +56,7 @@ const About = () => {
             <div className="mt-16">
               <div className="flex items-baseline gap-3 mb-8">
                 <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
-                  § The 4D Framework
+                  The 4D Framework
                 </span>
                 <span className="hidden sm:inline-block w-8 h-px bg-[#3a3a3a]" />
                 <span className="hidden sm:inline-block font-sub text-[10px] text-[#5c564c]">

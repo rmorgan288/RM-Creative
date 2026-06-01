@@ -28,7 +28,7 @@ const NotFound = () => (
   <div className="min-h-screen bg-[#0f0f0f] text-[#f2ece2] flex items-center justify-center px-6">
     <div className="max-w-md text-center">
       <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-        § 404 — Proposal not found
+        404 — Proposal not found
       </div>
       <h1 className="font-display-xl text-4xl md:text-5xl mb-6">
         This proposal is <span className="text-[#e3494e]">private</span> or has moved.
@@ -299,7 +299,7 @@ const ClientProposal = () => {
           <div className="grid md:grid-cols-12 gap-8 md:gap-14">
             <div className="md:col-span-8">
               <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-5">
-                § Proposal · {proposal.reference}
+                Proposal · {proposal.reference}
               </div>
               <h1 className="font-display-xl text-5xl md:text-7xl leading-[0.95] text-[#f2ece2] print:text-black">
                 {proposal.client}
@@ -337,7 +337,7 @@ const ClientProposal = () => {
           <div className="grid md:grid-cols-12 gap-10">
             <div className="md:col-span-4">
               <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-                § 01 Project Scope
+                01 Project Scope
               </div>
               <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2] print:text-black">
                 What we’re <span className="text-[#e3494e]">setting out to do.</span>
@@ -401,7 +401,7 @@ const ClientProposal = () => {
         <section className="py-16 md:py-24 border-b border-[#1f1f1f]">
           <div className="mb-12">
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-              § 02 Initial Ideas
+              02 Initial Ideas
             </div>
             <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2] print:text-black max-w-3xl">
               A few <span className="text-[#e3494e]">starting points.</span>
@@ -439,7 +439,7 @@ const ClientProposal = () => {
           <div className="flex items-end justify-between gap-6 mb-10 flex-wrap">
             <div>
               <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-                § 03 Investment
+                03 Investment
               </div>
               <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2] print:text-black">
                 Three <span className="text-[#e3494e]">tiers.</span>
@@ -518,7 +518,7 @@ const ClientProposal = () => {
         {/* Terms */}
         <section className="py-12 border-b border-[#1f1f1f]">
           <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-5">
-            § 04 Terms
+            04 Terms
           </div>
           <ul className="grid md:grid-cols-3 gap-6">
             {proposal.terms.map((t, i) => (
@@ -573,7 +573,7 @@ const ClientProposal = () => {
             ) : flow === 'declined-done' ? (
               <div className="text-center">
                 <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-                  § Proposal declined
+                  Proposal declined
                 </div>
                 <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2]">
                   Thank you for the <span className="text-[#e3494e]">honest read.</span>
@@ -586,7 +586,7 @@ const ClientProposal = () => {
             ) : (
               <div className="text-center">
                 <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
-                  § Next step
+                  Next step
                 </div>
                 <h2 className="font-display-xl text-3xl md:text-5xl text-[#f2ece2]">
                   Ready to move forward?
@@ -675,7 +675,7 @@ const ClientProposal = () => {
                         <X className="w-4 h-4" />
                       </button>
                       <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#e3494e] mb-2">
-                        § Ask a question or request a revision
+                        Ask a question or request a revision
                       </div>
                       <h3 className="font-display uppercase tracking-tight text-xl md:text-2xl text-[#f2ece2] font-bold">
                         What would you like changed?
@@ -773,7 +773,7 @@ const ClientProposal = () => {
                         <X className="w-4 h-4" />
                       </button>
                       <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-2">
-                        § Not the right fit?
+                        Not the right fit?
                       </div>
                       <h3 className="font-display uppercase tracking-tight text-xl md:text-2xl text-[#f2ece2] font-bold">
                         A quick line on why?
