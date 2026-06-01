@@ -12,6 +12,7 @@ import { SiteContentProvider } from './contexts/SiteContentContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Toaster } from './components/ui/sonner';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
       </BrowserRouter>
       <Toaster position="bottom-right" theme="dark" />
       <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
