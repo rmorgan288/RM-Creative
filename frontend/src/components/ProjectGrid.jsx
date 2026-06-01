@@ -9,7 +9,7 @@ const ProjectGrid = () => {
         <div className="flex items-end justify-between mb-14">
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-3">
-              § Selected Work
+              Selected Work
             </div>
             <h2 className="font-display-xl text-4xl md:text-7xl text-[#f2ece2] max-w-3xl">
               More projects, <span className="text-[#e3494e]">fewer words.</span>

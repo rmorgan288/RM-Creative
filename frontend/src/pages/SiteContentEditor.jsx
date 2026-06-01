@@ -183,7 +183,7 @@ const SiteContentEditor = () => {
       <main className="max-w-[1100px] mx-auto px-6 md:px-10 py-10 md:py-14">
         <div className="mb-10">
           <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-3">
-            § Site Content
+            Site Content
           </div>
           <h1 className="font-display-xl text-4xl md:text-5xl">
             Edit the <span className="text-[#e3494e]">homepage.</span>

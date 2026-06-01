@@ -58,8 +58,7 @@ export const featuredProject = {
   ],
   quote: {
     text: 'Rhys didn’t just refresh a logo — he honoured twenty years of work and gave us a flame to carry into the next twenty.',
-    author: 'Naomi Hart',
-    role: 'Founder, Butterflies Bar & Kitchen',
+    client: 'Butterflies Bar & Kitchen',
   },
 };
 
@@ -160,20 +159,17 @@ export const testimonials = [
   {
     quote:
       'The rarest kind of designer — strategic, quietly obsessive, and genuinely fun to have in a room.',
-    author: 'Daniel Okafor',
-    role: 'Brand Lead, SportTape',
+    client: 'SportTape',
   },
   {
     quote:
       'Rhys treated our brief like his own. We picked up a YCN award and a campaign people still quote back to us.',
-    author: 'Eleanor Voss',
-    role: 'Marketing Director, Feel Good Drinks Co.',
+    client: 'Feel Good Drinks Co.',
   },
   {
     quote:
       'He honoured twenty years of work and gave us a flame to carry into the next twenty.',
-    author: 'Naomi Hart',
-    role: 'Founder, Butterflies Bar & Kitchen',
+    client: 'Butterflies Bar & Kitchen',
   },
 ];
 
