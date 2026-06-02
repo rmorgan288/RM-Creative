@@ -14,6 +14,23 @@
         <!-- Bing Webmaster verification (optional) — replace REPLACE_WITH_BING_CODE if you submit there too -->
         <meta name="msvalidate.01" content="REPLACE_WITH_BING_CODE" />
 
+        <!--
+          Google Analytics 4 — to activate:
+          1. Create a GA4 property at https://analytics.google.com (Admin → Create property)
+          2. Copy your Measurement ID (format: G-XXXXXXXXXX)
+          3. Replace BOTH occurrences of G-XXXXXXXXXX below
+          4. Remove the surrounding HTML comment tags
+        -->
+        <!--
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+        </script>
+        -->
+
         <!-- OpenGraph defaults (per-route overrides via react-helmet-async) -->
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Rhys Morgan — Creative Marketing" />

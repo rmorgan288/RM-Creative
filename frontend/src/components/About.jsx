@@ -46,6 +46,15 @@ const About = () => {
               <span className="text-[#e3494e]">{about.headingAccent}</span>
             </h2>
 
+            {/* Location — keyword anchor for SEO + sense of place */}
+            <address
+              data-testid="about-location"
+              className="not-italic mt-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]"
+            >
+              <span className="inline-block w-2 h-2 rounded-full bg-[#e3494e]" aria-hidden="true" />
+              Based in Blaenau Gwent · Working with brands across South Wales and beyond
+            </address>
+
             <div className="mt-8 space-y-5 text-[16px] text-[#c9c2b5] leading-relaxed max-w-2xl font-light">
               {about.body.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
