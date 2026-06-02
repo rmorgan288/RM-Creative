@@ -38,7 +38,7 @@ export const hero = {
 
 export const featuredProject = {
   id: 'butterflies',
-  client: 'Butterflies Bar & Kitchen',
+  client: 'Butterflies Steakhouse',
   sector: 'Hospitality · 20-Year Rebrand',
   year: 2025,
   headline: 'Twenty years in. A whole new fire.',
@@ -58,7 +58,7 @@ export const featuredProject = {
   ],
   quote: {
     text: 'Rhys didn’t just refresh a logo — he honoured twenty years of work and gave us a flame to carry into the next twenty.',
-    client: 'Butterflies Bar & Kitchen',
+    client: 'Butterflies Steakhouse',
   },
 };
 
@@ -169,7 +169,7 @@ export const testimonials = [
   {
     quote:
       'He honoured twenty years of work and gave us a flame to carry into the next twenty.',
-    client: 'Butterflies Bar & Kitchen',
+    client: 'Butterflies Steakhouse',
   },
 ];
 
@@ -212,7 +212,7 @@ export const clientsList = [
   'The Royal Mint',
   'National Grid',
   'e.on',
-  'Butterflies Bar & Kitchen',
+  'Butterflies Steakhouse',
   'St Albans City FC',
   'Marie Curie',
 ];
