@@ -23,9 +23,16 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { Label } from '../components/ui/label';
 import { toast } from 'sonner';
+import SEO from '../components/SEO';
 
 const NotFound = () => (
   <div className="min-h-screen bg-[#0f0f0f] text-[#f2ece2] flex items-center justify-center px-6">
+    <SEO
+      title="Proposal not found — Rhys Morgan"
+      description="This proposal is private or has moved."
+      path="/proposals"
+      robots="noindex, nofollow"
+    />
     <div className="max-w-md text-center">
       <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378] mb-4">
         404 — Proposal not found
@@ -232,6 +239,12 @@ const ClientProposal = () => {
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-[#f2ece2] print:bg-white print:text-black">
+      <SEO
+        title={`Proposal — ${proposal.client}`}
+        description={`Private client proposal for ${proposal.client}: ${proposal.projectTitle}.`}
+        path={`/proposals/${proposal.slug}`}
+        robots="noindex, nofollow"
+      />
       {/* Proposal header bar (replaces site nav) */}
       <header className="sticky top-0 z-40 bg-[#0f0f0f]/90 backdrop-blur-md border-b border-[#1f1f1f] print:hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">

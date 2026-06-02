@@ -5,6 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { toast } from 'sonner';
+import SEO from '../components/SEO';
 
 const Login = () => {
   const { login, isAuthenticated, loading } = useAuth();
@@ -13,15 +14,6 @@ const Login = () => {
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Block search engines from indexing
-  useEffect(() => {
-    const meta = document.createElement('meta');
-    meta.name = 'robots';
-    meta.content = 'noindex, nofollow';
-    document.head.appendChild(meta);
-    return () => document.head.removeChild(meta);
-  }, []);
 
   useEffect(() => {
     if (!loading && isAuthenticated) {
@@ -50,6 +42,12 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-[#f2ece2] flex items-center justify-center px-6 relative overflow-hidden">
+      <SEO
+        title="Sign in — Rhys Morgan Studio"
+        description="Private admin sign-in."
+        path="/login"
+        robots="noindex, nofollow"
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute -bottom-40 -right-40 w-[520px] h-[520px] rounded-full blur-3xl opacity-25"

@@ -26,6 +26,7 @@ import {
   apiMarkActionRead,
 } from '../lib/api';
 import { toast } from 'sonner';
+import SEO from '../components/SEO';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -57,14 +58,6 @@ const Admin = () => {
   const [actions, setActions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [confirmDel, setConfirmDel] = useState(null);
-
-  useEffect(() => {
-    const meta = document.createElement('meta');
-    meta.name = 'robots';
-    meta.content = 'noindex, nofollow';
-    document.head.appendChild(meta);
-    return () => document.head.removeChild(meta);
-  }, []);
 
   const loadAll = async () => {
     setLoading(true);
@@ -118,6 +111,12 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-[#f2ece2]">
+      <SEO
+        title="Admin Dashboard — Rhys Morgan Studio"
+        description="Private admin dashboard."
+        path="/admin"
+        robots="noindex, nofollow"
+      />
       {/* Top bar */}
       <header className="sticky top-0 z-40 bg-[#0f0f0f]/90 backdrop-blur-md border-b border-[#1f1f1f]">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
