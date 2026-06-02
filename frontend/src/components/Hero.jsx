@@ -142,7 +142,13 @@ const Hero = () => {
         aria-hidden="true"
         data-testid="hero-neat-gradient"
         className="pointer-events-none absolute inset-0 w-full h-full"
-        style={{ zIndex: 0 }}
+        style={{
+          zIndex: 0,
+          WebkitMaskImage:
+            'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.7) 78%, rgba(0,0,0,0.25) 92%, rgba(0,0,0,0) 100%)',
+          maskImage:
+            'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.7) 78%, rgba(0,0,0,0.25) 92%, rgba(0,0,0,0) 100%)',
+        }}
       />
       {/* Dark overlay for legibility */}
       <div
@@ -224,7 +230,7 @@ const Hero = () => {
       </div>
 
       {/* Client marquee */}
-      <div className="mt-24 md:mt-28 border-y border-[#1f1f1f] py-8 overflow-hidden relative bg-[#0a0a0a]" style={{ zIndex: 2 }}>
+      <div className="mt-24 md:mt-28 border-y border-[#1f1f1f] py-8 overflow-hidden relative" style={{ zIndex: 2 }}>
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-5">
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
             Selected client experience

@@ -17,6 +17,15 @@ code {
         source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
+/* Hide NeatGradient attribution link */
+a[data-n="1"],
+a[data-n] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;
