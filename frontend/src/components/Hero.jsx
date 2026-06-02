@@ -1,9 +1,133 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
+import { NeatGradient } from '@firecms/neat';
 import { useSiteContent } from '../contexts/SiteContentContext';
+
+const neatConfig = {
+  colors: [
+    { color: '#F50030', enabled: true },
+    { color: '#F70010', enabled: true },
+    { color: '#AB0006', enabled: true },
+    { color: '#FF000D', enabled: true },
+    { color: '#251313', enabled: true },
+  ],
+  speed: 6.5,
+  horizontalPressure: 6,
+  verticalPressure: 8,
+  waveFrequencyX: 3,
+  waveFrequencyY: 2,
+  waveAmplitude: 6,
+  shadows: 10,
+  highlights: 8,
+  colorBrightness: 1.05,
+  colorSaturation: -5,
+  wireframe: false,
+  colorBlending: 10,
+  backgroundColor: '#000000',
+  backgroundAlpha: 1,
+  grainScale: 0,
+  grainSparsity: 0,
+  grainIntensity: 0.325,
+  grainSpeed: 5.4,
+  resolution: 2,
+  yOffset: 25132,
+  yOffsetWaveMultiplier: 13.1,
+  yOffsetColorMultiplier: 5.8,
+  yOffsetFlowMultiplier: 6.5,
+  flowDistortionA: 1.1,
+  flowDistortionB: 5.8,
+  flowScale: 2.9,
+  flowEase: 0.27,
+  flowEnabled: true,
+  enableProceduralTexture: false,
+  transparentTextureVoid: false,
+  textureVoidLikelihood: 0.27,
+  textureVoidWidthMin: 60,
+  textureVoidWidthMax: 420,
+  textureBandDensity: 1.2,
+  textureColorBlending: 0.06,
+  textureSeed: 333,
+  textureEase: 0.22,
+  proceduralBackgroundColor: '#0E0707',
+  textureShapeTriangles: 20,
+  textureShapeCircles: 15,
+  textureShapeBars: 15,
+  textureShapeSquiggles: 10,
+  domainWarpEnabled: true,
+  domainWarpIntensity: 0.3,
+  domainWarpScale: 1,
+  vignetteIntensity: 1,
+  vignetteRadius: 0.8,
+  fresnelEnabled: true,
+  fresnelPower: 1.8,
+  fresnelIntensity: 0.1,
+  fresnelColor: '#D22525',
+  iridescenceEnabled: false,
+  iridescenceIntensity: 0.5,
+  iridescenceSpeed: 1,
+  bloomIntensity: 0,
+  bloomThreshold: 0.7,
+  chromaticAberration: 3.5,
+  shapeType: 'plane',
+  shapeRotationX: 0.61,
+  shapeRotationY: 0,
+  shapeRotationZ: 0,
+  shapeAutoRotateSpeedX: 0,
+  shapeAutoRotateSpeedY: 0,
+  sphereRadius: 15,
+  torusRadius: 15,
+  torusTube: 5,
+  cylinderRadius: 10,
+  cylinderHeight: 40,
+  planeBend: 0,
+  planeTwist: 0,
+  silhouetteFade: 0.25,
+  cylinderFade: 0.08,
+  ribbonFade: 0.05,
+  cameraLock: true,
+  cameraX: 0,
+  cameraY: 0,
+  cameraZ: 0,
+  cameraRotationX: -0.238,
+  cameraRotationY: -0.014,
+  cameraRotationZ: 0,
+  cameraZoom: 1,
+};
 
 const Hero = () => {
   const { hero, brand, clientsList } = useSiteContent();
+  const canvasRef = useRef(null);
+  const gradientRef = useRef(null);
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    let gradient;
+    try {
+      gradient = new NeatGradient({
+        ref: canvasRef.current,
+        ...neatConfig,
+      });
+      gradientRef.current = gradient;
+    } catch (e) {
+      console.error('NeatGradient init failed', e);
+    }
+
+    const handleScroll = () => {
+      if (gradientRef.current) {
+        gradientRef.current.yOffset = window.scrollY;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (gradient && typeof gradient.destroy === 'function') {
+        gradient.destroy();
+      }
+      gradientRef.current = null;
+    };
+  }, []);
+
   const scrollTo = (id) => {
     const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -11,17 +135,27 @@ const Hero = () => {
 
   return (
     <section id="top" className="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden">
-      {/* Soft accent gradient top-right (kept under 20% area) */}
+      {/* Animated NeatGradient WebGL background */}
+      <canvas
+        ref={canvasRef}
+        id="gradient"
+        aria-hidden="true"
+        data-testid="hero-neat-gradient"
+        className="pointer-events-none absolute inset-0 w-full h-full"
+        style={{ zIndex: 0 }}
+      />
+      {/* Dark overlay for legibility */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -right-40 w-[520px] h-[520px] rounded-full blur-3xl opacity-30"
+        className="pointer-events-none absolute inset-0"
         style={{
+          zIndex: 1,
           background:
-            'radial-gradient(closest-side, rgba(227,73,78,0.35), rgba(227,73,78,0) 70%)',
+            'linear-gradient(180deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.35) 45%, rgba(10,10,10,0.85) 100%)',
         }}
       />
 
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative" style={{ zIndex: 2 }}>
         {/* Eyebrow row */}
         <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-8">
           <span className="flex items-center gap-3">
@@ -90,7 +224,7 @@ const Hero = () => {
       </div>
 
       {/* Client marquee */}
-      <div className="mt-24 md:mt-28 border-y border-[#1f1f1f] py-8 overflow-hidden relative">
+      <div className="mt-24 md:mt-28 border-y border-[#1f1f1f] py-8 overflow-hidden relative bg-[#0a0a0a]" style={{ zIndex: 2 }}>
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-5">
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8a8378]">
             Selected client experience
