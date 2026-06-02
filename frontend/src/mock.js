@@ -119,15 +119,15 @@ export const projects = [
       'Shaping the story of a future London landmark. A complete visual identity, website and social presence designed to bring a major City development to market with confidence.',
   },
   {
-    id: 'raf-150th-coin',
-    client: 'RAF 150th Anniversary £2 Coin',
+    id: 'raf-100th-coin',
+    client: 'RAF 100th Anniversary £2 Coin',
     sector: 'Coin Design · Commemorative',
     year: null,
     thumbnail:
       'https://customer-assets.emergentagent.com/job_design-portfolio-780/artifacts/69p1r9kv_royal-mint-raf-coin%403x-50.jpg',
     tags: ['Coin Design', 'Art Direction'],
     blurb:
-      'Marking 150 years of aviation history. A commemorative UK £2 coin designed for The Royal Mint and released into circulation, celebrating the legacy of the Royal Air Force.',
+      'Marking 100 years of aviation history. A commemorative UK £2 coin designed for The Royal Mint and released into circulation, celebrating the legacy of the Royal Air Force.',
   },
 ];
 
