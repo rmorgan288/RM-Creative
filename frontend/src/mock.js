@@ -107,6 +107,28 @@ export const projects = [
     blurb:
       'A personal body of work spanning fan art, character studies and digital illustration — from Pokémon and Zelda to Marvel and beyond. Built for the love of it, open for commission.',
   },
+  {
+    id: '60-gracechurch-street',
+    client: '60 Gracechurch Street',
+    sector: 'Property · Branding',
+    year: null,
+    thumbnail:
+      'https://customer-assets.emergentagent.com/job_design-portfolio-780/artifacts/i74crieo_60gc%403x-50.jpg',
+    tags: ['Brand Identity', 'Website Design', 'Social Media'],
+    blurb:
+      'Shaping the story of a future London landmark. A complete visual identity, website and social presence designed to bring a major City development to market with confidence.',
+  },
+  {
+    id: 'raf-150th-coin',
+    client: 'RAF 150th Anniversary £2 Coin',
+    sector: 'Coin Design · Commemorative',
+    year: null,
+    thumbnail:
+      'https://customer-assets.emergentagent.com/job_design-portfolio-780/artifacts/69p1r9kv_royal-mint-raf-coin%403x-50.jpg',
+    tags: ['Coin Design', 'Art Direction'],
+    blurb:
+      'Marking 150 years of aviation history. A commemorative UK £2 coin designed for The Royal Mint and released into circulation, celebrating the legacy of the Royal Air Force.',
+  },
 ];
 
 export const services = [
