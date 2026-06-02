@@ -22,13 +22,14 @@ const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Rhys Morgan',
-  jobTitle: 'Creative Director',
+  jobTitle: ['Graphic Designer', 'Creative Director'],
   description:
-    'Freelance Creative Director and brand strategist specialising in brand identity, web design and marketing services for ambitious teams.',
+    'Freelance Graphic Designer and Creative Director based in Blaenau Gwent, South Wales, specialising in brand identity, web design and marketing services for ambitious teams.',
   url: SITE_ORIGIN,
   image: LOGO_URL,
   address: {
     '@type': 'PostalAddress',
+    addressLocality: 'Blaenau Gwent',
     addressRegion: 'South Wales',
     addressCountry: 'GB',
   },
@@ -37,6 +38,7 @@ const personSchema = {
     name: 'Rhys Morgan Creative',
   },
   knowsAbout: [
+    'Graphic Design',
     'Brand Identity',
     'Brand Strategy',
     'Creative Direction',
@@ -53,7 +55,7 @@ const localBusinessSchema = {
   '@id': `${SITE_ORIGIN}/#business`,
   name: 'Rhys Morgan Creative',
   description:
-    'Independent creative studio led by Rhys Morgan, offering brand identity, web design and marketing services from South Wales for clients across the UK and beyond.',
+    'Independent creative studio led by Rhys Morgan — freelance Graphic Designer and Creative Director — offering brand identity, web design and marketing services from Blaenau Gwent, South Wales, for clients across the UK and beyond.',
   url: SITE_ORIGIN,
   image: LOGO_URL,
   logo: LOGO_URL,
@@ -63,16 +65,19 @@ const localBusinessSchema = {
     name: 'Rhys Morgan',
   },
   areaServed: [
+    { '@type': 'Place', name: 'Blaenau Gwent' },
     { '@type': 'Place', name: 'South Wales' },
     { '@type': 'Place', name: 'United Kingdom' },
     { '@type': 'Place', name: 'London' },
   ],
   address: {
     '@type': 'PostalAddress',
+    addressLocality: 'Blaenau Gwent',
     addressRegion: 'South Wales',
     addressCountry: 'GB',
   },
   knowsAbout: [
+    'Graphic Design',
     'Brand Identity',
     'Brand Strategy',
     'Creative Direction',
@@ -80,6 +85,7 @@ const localBusinessSchema = {
     'Marketing Services',
   ],
   makesOffer: [
+    { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Graphic Design' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Brand Identity' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Web Design & Build' } },
     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Creative Direction' } },
@@ -134,8 +140,8 @@ const Portfolio = () => {
   return (
     <div className="relative grain">
       <SEO
-        title="Rhys Morgan — Creative Director, South Wales | Brand & Web"
-        description="Rhys Morgan is a freelance Creative Director in South Wales. Brand strategy, identity, web design and marketing services for ambitious teams — Disney, Team GB, The Royal Mint."
+        title="Rhys Morgan — Graphic Designer & Creative Director, Wales"
+        description="Freelance Graphic Designer & Creative Director in Blaenau Gwent, South Wales. Brand strategy, identity, web design & marketing — Disney, Team GB, Royal Mint."
         path="/"
         jsonLd={homepageJsonLd}
       />

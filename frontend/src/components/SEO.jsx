@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 // Brand-wide defaults — single source of truth
 const SITE_NAME = 'Rhys Morgan — Creative Marketing';
 const DEFAULT_DESCRIPTION =
-  'Freelance Creative Director and brand strategist based in South Wales. Brand identity, web design and marketing services for ambitious teams.';
+  'Freelance Graphic Designer and Creative Director based in Blaenau Gwent, South Wales. Brand identity, web design and marketing services for ambitious teams.';
 const LOGO_URL =
   'https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/9468c975faec4774af2c1d56b4fe990d_RM_Logo-Mark_Red.png';
 
