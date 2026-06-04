@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import Portfolio from './pages/Portfolio';
-import ClientProposal from './pages/ClientProposal';
-import Login from './pages/Login';
-import Admin from './pages/Admin';
-import ProposalEditor from './pages/ProposalEditor';
-import SiteContentEditor from './pages/SiteContentEditor';
 import { AuthProvider } from './contexts/AuthContext';
 import { SiteContentProvider } from './contexts/SiteContentContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Toaster } from './components/ui/sonner';
+
+// Portfolio loads immediately — it is the public homepage
+import Portfolio from './pages/Portfolio';
+
+// Everything else loads only when needed
+const ClientProposal = lazy(() => import('./pages/ClientProposal'));
+const Login = lazy(() => import('./pages/Login'));
+const Admin = lazy(() => import('./pages/Admin'));
+const ProposalEditor = lazy(() => import('./pages/ProposalEditor'));
+const SiteContentEditor = lazy(() => import('./pages/SiteContentEditor'));
 
 function App() {
   return (
@@ -20,36 +24,37 @@ function App() {
         <BrowserRouter>
           <AuthProvider>
             <SiteContentProvider>
-              <Routes>
-                <Route path="/" element={<Portfolio />} />
-                <Route path="/proposals/:slug" element={<ClientProposal />} />
-                {/* Hidden admin routes — no public links anywhere */}
-                <Route path="/login" element={<Login />} />
-                <Route
-                  path="/admin"
-                  element={
-                    <ProtectedRoute>
-                      <Admin />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/site-content"
-                  element={
-                    <ProtectedRoute>
-                      <SiteContentEditor />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/admin/proposals/:id"
-                  element={
-                    <ProtectedRoute>
-                      <ProposalEditor />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
+              <Suspense fallback={<div style={{ background: '#0f0f0f', minHeight: '100vh' }} />}>
+                <Routes>
+                  <Route path="/" element={<Portfolio />} />
+                  <Route path="/proposals/:slug" element={<ClientProposal />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route
+                    path="/admin"
+                    element={
+                      <ProtectedRoute>
+                        <Admin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/site-content"
+                    element={
+                      <ProtectedRoute>
+                        <SiteContentEditor />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/proposals/:id"
+                    element={
+                      <ProtectedRoute>
+                        <ProposalEditor />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </Suspense>
             </SiteContentProvider>
           </AuthProvider>
         </BrowserRouter>
