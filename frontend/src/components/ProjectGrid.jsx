@@ -29,6 +29,7 @@ const ProjectGrid = () => {
                   alt={p.client}
                   className="w-full h-[60vh] object-cover"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="mt-6 flex items-start justify-between gap-6">

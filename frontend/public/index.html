@@ -11,13 +11,18 @@
         <!-- Google Search Console verification -->
         <meta name="google-site-verification" content="x4V36CebEnMF6id99ncv6_zqT81ehbXX9anyyjUXg-A" />
 
-        <!-- Google Analytics 4 -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DSY521FGLH"></script>
+        <!-- Google Analytics 4 — deferred so it does not block paint -->
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-DSY521FGLH');
+          window.addEventListener('load', function() {
+            var s = document.createElement('script');
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DSY521FGLH';
+            s.async = true;
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('config', 'G-DSY521FGLH');
+          });
         </script>
 
         <!-- OpenGraph -->
@@ -35,10 +40,15 @@
         <meta name="twitter:description" content="Freelance Graphic Designer in Blaenau Gwent, South Wales. Brand strategy, identity, web design and marketing services." />
         <meta name="twitter:image" content="https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/9468c975faec4774af2c1d56b4fe990d_RM_Logo-Mark_Red.png" />
 
-        <!-- Fonts — single consolidated import -->
+        <!-- Resource hints for image CDN -->
+        <link rel="dns-prefetch" href="https://customer-assets.emergentagent.com" />
+        <link rel="preconnect" href="https://customer-assets.emergentagent.com" crossorigin />
+
+        <!-- Fonts — reduced to weights actually used -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400&family=JetBrains+Mono:wght@400&display=swap" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/9468c975faec4774af2c1d56b4fe990d_RM_Logo-Mark_Red.png" />

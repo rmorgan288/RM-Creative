@@ -30,7 +30,9 @@ const FeaturedCase = () => {
             src={p.cover}
             alt={`${p.client} cover`}
             className="w-full h-[56vh] md:h-[82vh] object-cover"
-            loading="lazy"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           />
         </div>
 
@@ -61,8 +63,9 @@ const FeaturedCase = () => {
               <img
                 src={src}
                 alt={`${p.client} detail ${i + 1}`}
-                className={`w-full object-cover ${i === 0 ? 'h-[60vh]' : 'h-[60vh]'}`}
+                className="w-full h-[60vh] object-cover"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           ))}
@@ -81,9 +84,9 @@ const FeaturedCase = () => {
         {/* Pull quote */}
         <figure className="mt-20 md:mt-28 max-w-4xl">
           <blockquote className="font-display text-2xl md:text-4xl leading-[1.25] text-[#f2ece2] font-medium">
-            <span className="text-[#e3494e]">“</span>
+            <span className="text-[#e3494e]">"</span>
             {p.quote.text}
-            <span className="text-[#e3494e]">”</span>
+            <span className="text-[#e3494e]">"</span>
           </blockquote>
           <figcaption className="mt-6 font-sub text-[12px] text-[#8a8378]">
             — {p.quote.client}

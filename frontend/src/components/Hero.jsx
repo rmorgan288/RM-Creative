@@ -102,14 +102,23 @@ const Hero = () => {
   useEffect(() => {
     if (!canvasRef.current) return;
     let gradient;
-    try {
-      gradient = new NeatGradient({
-        ref: canvasRef.current,
-        ...neatConfig,
-      });
-      gradientRef.current = gradient;
-    } catch (e) {
-      console.error('NeatGradient init failed', e);
+    let scheduled;
+
+    const initGradient = () => {
+      if (!canvasRef.current) return;
+      try {
+        gradient = new NeatGradient({ ref: canvasRef.current, ...neatConfig });
+        gradientRef.current = gradient;
+      } catch (e) {
+        console.error('NeatGradient init failed', e);
+      }
+    };
+
+    // Defer WebGL init until browser is idle so it doesn't block FCP/LCP
+    if (typeof requestIdleCallback !== 'undefined') {
+      scheduled = requestIdleCallback(initGradient, { timeout: 2000 });
+    } else {
+      scheduled = setTimeout(initGradient, 300);
     }
 
     const handleScroll = () => {
@@ -117,10 +126,15 @@ const Hero = () => {
         gradientRef.current.yOffset = window.scrollY;
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (typeof requestIdleCallback !== 'undefined') {
+        cancelIdleCallback(scheduled);
+      } else {
+        clearTimeout(scheduled);
+      }
       if (gradient && typeof gradient.destroy === 'function') {
         gradient.destroy();
       }
@@ -135,7 +149,20 @@ const Hero = () => {
 
   return (
     <section id="top" className="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden">
-      {/* Animated NeatGradient WebGL background */}
+      {/* Static CSS gradient shown immediately; WebGL canvas layers on top once ready */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          zIndex: 0,
+          background: 'radial-gradient(ellipse at 60% 40%, #AB0006 0%, #3d0000 45%, #000000 100%)',
+          WebkitMaskImage:
+            'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.7) 78%, rgba(0,0,0,0.25) 92%, rgba(0,0,0,0) 100%)',
+          maskImage:
+            'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 55%, rgba(0,0,0,0.7) 78%, rgba(0,0,0,0.25) 92%, rgba(0,0,0,0) 100%)',
+        }}
+      />
+      {/* Animated NeatGradient WebGL background — deferred until idle */}
       <canvas
         ref={canvasRef}
         id="gradient"
