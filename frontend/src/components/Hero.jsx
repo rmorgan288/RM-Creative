@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowDown, ArrowUpRight, MapPin } from 'lucide-react';
-import { NeatGradient } from '@firecms/neat';
 import { useSiteContent } from '../contexts/SiteContentContext';
 
 const neatConfig = {
@@ -29,7 +28,7 @@ const neatConfig = {
   grainSparsity: 0,
   grainIntensity: 0.325,
   grainSpeed: 5.4,
-  resolution: 2,
+  resolution: 0.5,
   yOffset: 25132,
   yOffsetWaveMultiplier: 13.1,
   yOffsetColorMultiplier: 5.8,
@@ -104,9 +103,11 @@ const Hero = () => {
     let gradient;
     let scheduled;
 
-    const initGradient = () => {
+    const initGradient = async () => {
       if (!canvasRef.current) return;
       try {
+        const { NeatGradient } = await import('@firecms/neat');
+        if (!canvasRef.current) return;
         gradient = new NeatGradient({ ref: canvasRef.current, ...neatConfig });
         gradientRef.current = gradient;
       } catch (e) {

@@ -44,11 +44,11 @@
         <link rel="dns-prefetch" href="https://customer-assets.emergentagent.com" />
         <link rel="preconnect" href="https://customer-assets.emergentagent.com" crossorigin />
 
-        <!-- Fonts — reduced to weights actually used -->
+        <!-- Fonts — async non-render-blocking load -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400&family=JetBrains+Mono:wght@400&display=swap" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400&family=JetBrains+Mono:wght@400&display=swap" media="print" onload="this.media='all'" />
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400&family=JetBrains+Mono:wght@400&display=swap" /></noscript>
 
         <!-- Favicon -->
         <link rel="icon" type="image/png" href="https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/9468c975faec4774af2c1d56b4fe990d_RM_Logo-Mark_Red.png" />
@@ -83,7 +83,7 @@
               "image": "https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/9468c975faec4774af2c1d56b4fe990d_RM_Logo-Mark_Red.png",
               "logo": "https://customer-assets.emergentagent.com/wingman/821fda20-6b65-4bc0-9677-fe505c145882/attachments/9468c975faec4774af2c1d56b4fe990d_RM_Logo-Mark_Red.png",
               "priceRange": "££££",
-              "founder": { "@type": "Person", "name": "Rhys Morgan" },
+              "founder": { "@type": "Person", name": "Rhys Morgan" },
               "areaServed": [
                 { "@type": "Place", "name": "Blaenau Gwent" },
                 { "@type": "Place", "name": "South Wales" },
@@ -125,7 +125,7 @@
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
 
-        <!-- Posthog — deferred so it does not block page load -->
+        <!-- Posthog — deferred, session recording disabled to protect performance -->
         <script defer>
             window.addEventListener('load', function() {
                 !(function (t, e) {
@@ -176,10 +176,9 @@
                 posthog.init("phc_xAvL2Iq4tFmANRE7kzbKwaSqp1HJjN7x48s3vr0CMjs", {
                     api_host: "https://us.i.posthog.com",
                     person_profiles: "identified_only",
-                    session_recording: {
-                        recordCrossOriginIframes: true,
-                        capturePerformance: false,
-                    },
+                    disable_session_recording: true,
+                    autocapture: false,
+                    capture_performance: false,
                 });
             });
         </script>
